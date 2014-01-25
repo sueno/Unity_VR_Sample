@@ -87,8 +87,16 @@ public class MainCharacterData {
 	public GameObject LeftEye = null;
 	public GameObject Expression = null;
 
-	public HandController RightHandController;
-	public HandController LeftHandController;
+	public HandController rightHandController;
+	public HandController RightHandController {
+		set{rightHandController = value;}
+		get{return rightHandController;}
+	}
+	public HandController leftHandController;
+	public HandController LeftHandController {
+		set{leftHandController = value;}
+		get{return leftHandController;}
+	}
 	
     public MainCharacterData() {
 		
@@ -161,8 +169,6 @@ public class MainCharacterData {
 		Debug.Log("MMDModel : "+rootObject.name+"  , playerID : "+playerID);
 		jo.registListener(playerID,rootObject,playerStatus);
 
-		RightHandController.registGameObj(rootObject);
-		LeftHandController.registGameObj(rootObject);
 	}
 	
 	public GameObject RootObject {
@@ -216,5 +222,9 @@ public class MainCharacterData {
 		for (int i=0; i<filter.Length; i++) {
 			moveFilter[i] = filter[i];
 		}
+	}
+
+	public void __setJointObject(int i, GameObject obj) {
+		gameObjects[i] = obj;
 	}
 }

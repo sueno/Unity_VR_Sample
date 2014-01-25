@@ -6,7 +6,7 @@ public class MMDJoint {
 
 	
 	private List<string> jointNameList = 
-	new List<string>(){"頭","__首","上半身","下半身","__Empty","左腕","左ひじ","__左手首","__Empty","__Empty","__Empty","右腕","右ひじ","__右手首","__Empty"
+	new List<string>(){"頭","首","上半身","下半身","__Empty","左腕","左ひじ","左手首","__Empty","__Empty","__Empty","右腕","右ひじ","右手首","__Empty"
 		,"__Empty","左足","左ひざ","__左足首","__Empty","右足","右ひざ","__右足首","__Empty","__Empty","__Empty","両目","右目","左目","Expression"};
 
 	private GameObject rootObj;

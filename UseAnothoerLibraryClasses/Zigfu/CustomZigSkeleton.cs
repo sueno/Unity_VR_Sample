@@ -35,7 +35,7 @@ public class CustomZigSkeleton : MonoBehaviour
 	public Transform RightFoot;
 	//edit start 9/21 {
 	//public bool mirror = false;
-	public bool mirror = true;
+	public bool mirror = false;
 	//} 9/21
 	public bool UpdateJointPositions = false;
 	public bool UpdateRootPosition = true;
@@ -63,8 +63,8 @@ public class CustomZigSkeleton : MonoBehaviour
 	private float ave_y = 0.0f;
 	private int count_y = 0;
 	
-	public Vector3 revisionPosition = new Vector3(6,4,6);
-	public float heightRoot = 0.3f;
+	public Vector3 revisionPosition = new Vector3(4,4,4);
+	public float heightRoot = 0.25f;
 	public float heightRivision = 0.5f;
 	
 	private Vector3[] rivisionRotations;
@@ -80,8 +80,8 @@ public class CustomZigSkeleton : MonoBehaviour
 	//private Vector3 revisionPosition = new Vector3(5,2,5);
 	private Vector3 moveDirection = Vector3.zero;
 	
-	public GameObject rootObject  = null;
-	private CharacterController controller;
+//	public GameObject rootObject  = null;
+//	private CharacterController controller;
 	
 	ZigJointId mirrorJoint(ZigJointId joint)
 	{
@@ -224,11 +224,12 @@ public class CustomZigSkeleton : MonoBehaviour
 		}
 		
 		//TODO add
-		if (rootObject==null) {
-			controller = (CharacterController)GetComponent("CharacterController");
-		} else {
-			controller = (CharacterController)rootObject.GetComponent("CharacterController");
-		}
+//		if (rootObject==null) {
+//			controller = (CharacterController)GetComponent("CharacterController");
+//		} else {
+//			controller = (CharacterController)rootObject.GetComponent("CharacterController");
+//		}
+		CharacterController controller = mainCharactorController.Data.RootObject.GetComponent<CharacterController>();
 		chara_height = controller.height;
 
 		
@@ -263,7 +264,7 @@ public class CustomZigSkeleton : MonoBehaviour
 			} else {
 				transform.localPosition = Vector3.zero;
 			}
-			controller.Move(new Vector3(moveDirection.x,0,moveDirection.z));
+			mainCharactorController.move(new Vector3(moveDirection.x,-9.8f,moveDirection.z));
 			moveDirection = rootPosition;
 			
 		}

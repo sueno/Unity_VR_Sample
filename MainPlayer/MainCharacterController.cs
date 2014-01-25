@@ -9,6 +9,7 @@ public class MainCharacterController : MonoBehaviour {
 
 	public bool mainPlayer = false;
 	public float dist = 0.02f;
+	public bool useRemoteController = false;
 	
 	public MainCharacterData data = new MainCharacterData();
 	public MainCharacterData Data {
@@ -45,7 +46,7 @@ public class MainCharacterController : MonoBehaviour {
 			data.RootObject = this.gameObject;
 		}
 
-		controller = (CharacterController)data.RootObject.GetComponent("CharacterController");
+		controller = (CharacterController)data.RootObject.GetComponent<CharacterController>();
 
 		moveStatus = new Normal(data.RootObject,dist);
 
@@ -58,6 +59,14 @@ public class MainCharacterController : MonoBehaviour {
 			playerID = GlobalController.getInstance().addPlayer(this);
 		}
 		data.init(playerID);
+
+		if (useRemoteController) {
+			data.__setJointObject((int)PlayerJoint.RightHand, null);
+			data.__setJointObject((int)PlayerJoint.LeftHand, null);
+			data.MainPlayer.AddComponent<HandMotion>();
+			data.RightHandController.registGameObj(data.RootObject);
+			data.LeftHandController.registGameObj(data.RootObject);
+		}
 
 		jointRotations = new RotationState[(int)(Enum.GetNames(typeof(PlayerJoint)).Length)];
 		for (int i=0; i<jointRotations.Length; i++) {
@@ -83,8 +92,10 @@ public class MainCharacterController : MonoBehaviour {
 			moveStatus = new Normal(data.rootObject,dist);
 		}
 
-		data.RightHandController.rotateJoints();
-		data.LeftHandController.rotateJoints();
+		if (useRemoteController) {
+			data.RightHandController.rotateJoints();
+			data.LeftHandController.rotateJoints();
+		}
 
 		for (int i=0; i<jointRotations.Length; i++) {
 			if (jointRotations[i].isChange()) {
