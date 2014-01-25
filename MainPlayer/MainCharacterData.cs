@@ -39,11 +39,11 @@ enum PlayerJoint {
 [System.Serializable]
 public class MainCharacterData {
 	
-	public PlayerMaterial playerStatus = new PlayerMaterial();
-	
 	public GameObject rootObject = null;
 	public GameObject mainPlayer = null;
 
+	public PlayerMaterial playerStatus = new PlayerMaterial();
+	
 	private int playerID = -1;
 	
     private GameObject[] gameObjects;
@@ -138,41 +138,17 @@ public class MainCharacterData {
 
 		RightHandController = new HandController(rootObject,1);
 		LeftHandController = new HandController(rootObject,-1);
+
+		/**
+		 * Info : require mmd-for-unity. 
+		 */
 		setMMDJoint();
 
-		foreach (GameObject obj in gameObjects) {
-//			Debug.Log(obj);
-			if (obj!=null) {
-//				obj.AddComponent<Rigidbody>();
-//				obj.rigidbody.useGravity = false;
-//				MeshCollider mesh = obj.AddComponent<MeshCollider>();
-//				obj.collider.isTrigger = true;
-//				mesh.convex = true;
-//				obj.AddComponent<MobParts>();
-//				obj.tag = "joint";
-//				MobParts part = obj.GetComponent<MobParts>();
-//				if (part!=null) {
-//					playerStatus.DataSource = part;
-////					Debug.Log (playerStatus+"  "+obj.name);
-//				}
-//				if(obj.transform.collider&&rootObject.transform.collider) {
-//					Physics.IgnoreCollision(rootObject.transform.collider,obj.transform.collider);
-//								}
-
-////				Collider[] collider1 = rootObject.GetComponents<Collider>();
-//				Collider c1 = rootObject.GetComponent<CharacterController>();
-//				Collider[] collider2 = obj.GetComponents<Collider>();
-//				Debug.Log("IGNORE  : "+c1+"  ::  "+obj.rigidbody.collider);
-////				foreach (Collider c1 in collider1) {
-//					foreach (Collider c2 in collider2) {
-//					Physics.IgnoreCollision(c1,c2);
-//					Physics.IgnoreCollision(c2,c1);
-//					}
-////				}
-			}
-		}
 	}
-	// for MMD
+	
+	/**
+	 * Info : require mmd-for-unity. 
+	 */
 	private void setMMDJoint() {
 		MMDJoint jo = new MMDJoint(rootObject);
 		GameObject[] joints = jo.registGameObj(mainPlayer);

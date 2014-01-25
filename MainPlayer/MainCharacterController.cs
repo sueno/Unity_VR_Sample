@@ -11,15 +11,31 @@ public class MainCharacterController : MonoBehaviour {
 	public float dist = 0.02f;
 	
 	public MainCharacterData data = new MainCharacterData();
+	public MainCharacterData Data {
+		get{return this.data;}
+	}
+
 	private MainMotionController motionController;
+	public MainMotionController MotionController {
+		get{return this.motionController;}
+	}
 	
 	private CharacterController controller;
+	public CharacterController Controller {
+		get{return controller;}
+	}
+
 	private MoveStatus moveStatus = null;
+	public MoveStatus MoveStatus {
+		set{this.moveStatus = value;}
+		get{return this.moveStatus;}
+	}
+
 	private RotateStatus rotateStatus = new RotateStatus();
 
 	private RotationState[] jointRotations;
 
-	private MoveAnimatorController moveAnimator;
+//	private MoveAnimatorController moveAnimator;
 	
 	public void Awake() {
 		if (data.RootObject==null) {
@@ -50,57 +66,31 @@ public class MainCharacterController : MonoBehaviour {
 		if (mainCamera) {
 			CameraPosition.AddComponent(mainCamera,data.RootObject,data.getJoint((int)PlayerJoint.Head),new Vector3(0f,0.11f,-0.037f));
 		}
-		Animator ani = GetComponent<Animator>();
-		moveAnimator = new MoveAnimatorController(ani);
+//		Animator ani = GetComponent<Animator>();
+//		moveAnimator = new MoveAnimatorController(ani);
 
 	}
 	
 	void LateUpdate () {
 		Vector3 moveDirection = moveStatus.getMove();
 		controller.Move(moveDirection);
-		moveAnimator.animation(moveDirection);
-//		data.rootObject.transform.Rotate(0,rotateStatus.getRotate(),0);
+//		moveAnimator.animation(moveDirection);
 		
-		if (moveStatus is Fall && isGrounded()) {
+		if (moveStatus is Fall && controller.isGrounded) {
 			moveStatus = new Normal(data.rootObject,dist);
 		}
 
 		data.RightHandController.rotateJoints();
 		data.LeftHandController.rotateJoints();
 
-//		int i;
 		for (int i=0; i<jointRotations.Length; i++) {
 			if (jointRotations[i].isChange()) {
-				Debug.Log(i+"   "+jointRotations[i].getRotation());
+//				Debug.Log(i+"   "+jointRotations[i].getRotation());
 				data.setRotation(i, jointRotations[i].getRotation());
 			}
 		}
 	}
 
-	bool isGrounded() {
-		return Physics.Raycast(data.rootObject.transform.position, new Vector3(0, -1, 0), 2.0f);
-	}
-
-//	void LateUpdate () {
-//		if (!Physics.Raycast(player.transform.position, new Vector3(0, -1, 0), 0.1f)) {
-//			Physics.Raycast(player.transform.position, new Vector3(0, -1, 0), 50f)
-//		}
-//	}
-
-	/**
-	 * property
-	 **/
-	public MainCharacterData Data {
-    	get{return this.data;}
-  	}
-	public MainMotionController MotionController {
-    	get{return this.motionController;}
-  	}
-	public MoveStatus MoveStatus {
-		set{this.moveStatus = value;}
-    	get{return this.moveStatus;}
-  	}
-	
 	public void move(Vector3 vec) {
 		controller.Move(vec);
 	}

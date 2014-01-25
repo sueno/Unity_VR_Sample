@@ -31,8 +31,8 @@ public class HandMotion : MonoBehaviour {
 	public GameObject lHand = null;
 	private Vector3 lHandR = Vector3.zero;
 	private Vector3 rootR = Vector3.zero;
-	public string[] vecAxis = new string[3]{"x","y","z"};
-	public Vector3 wpRotate = new Vector3(0.0f,-1f,1f);
+	public string[] vecAxis = new string[3]{"z","y","x"};
+	public Vector3 wpRotate = new Vector3(1f,-1f,-1f);
 	public float rotateRiv = 1.0f;
 	public float rotateLimit = 40.0f;
 	
