@@ -38,12 +38,15 @@ public class MainCharacterController : MonoBehaviour {
 //	private MoveAnimatorController moveAnimator;
 	
 	public void Awake() {
-		if (data.RootObject==null) {
-			controller = (CharacterController)GetComponent("CharacterController");
-			data.RootObject = this.gameObject;
-		} else {
-			controller = (CharacterController)data.RootObject.GetComponent("CharacterController");
+		if (!data.MainPlayer) {
+			data.MainPlayer = this.gameObject;
 		}
+		if (!data.RootObject) {
+			data.RootObject = this.gameObject;
+		}
+
+		controller = (CharacterController)data.RootObject.GetComponent("CharacterController");
+
 		moveStatus = new Normal(data.RootObject,dist);
 
 		int playerID = -1;
