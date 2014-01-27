@@ -15,8 +15,8 @@ public class HandController{
 
 	public string rightHandName = "右手首";
 	public string leftHandName = "左手首";
-	public string rightHandCollisionName = "r右手首";
-	public string leftHandCollisionName = "r左手首";
+	public string rightHandCollisionName = "r右手";
+	public string leftHandCollisionName = "r左手";
 
 	private RotationState fingerState;// = new RotationState();
 	public RotationState FingerState {

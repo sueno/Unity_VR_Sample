@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Item : MonoBehaviour {
+public class ItemMaterial : MonoBehaviour {
 	
 	public GameObject ParentObj {
 		get{return this.gameObject;}

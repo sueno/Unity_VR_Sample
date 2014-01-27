@@ -10,7 +10,7 @@ public class HandCollision : MonoBehaviour {
 	public GameObject holdObj;
 	private IList<Type> holdTypeList = new List<Type>(){
 		typeof(WeaponMaterial),
-		typeof(Item)
+		typeof(ItemMaterial)
 	};
 
 	private IList<GameObject> colList = new List<GameObject>();
@@ -52,7 +52,7 @@ public class HandCollision : MonoBehaviour {
 		WeaponMaterial w = obj.GetComponent<WeaponMaterial>();
 		if (w) return w.ParentObj;
 
-		Item i = obj.GetComponent<Item>();
+		ItemMaterial i = obj.GetComponent<ItemMaterial>();
 		if (i) return i.ParentObj;
 
 		}
