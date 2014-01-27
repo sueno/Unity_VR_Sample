@@ -86,9 +86,11 @@ Unity4.3.2
 8. Hierarchyの`MainPlayer/ZigFu`を選択し、Inspectorの`Zig Engage Single User`の項目を開き、次のように設定します
  + `Engaged Users`の中の`Element 0`にHierarchyのモデルをドラッグ＆ドロップします
 
-9. 実行します
+9. 使っていないライブラリのクラスを消します（`Unity_VR_Sample/UseAnothoerLibraryClasses/websocket-sharp`,`Unity_VR_Sample/UseAnothoerLibraryClasses/LitJSON`あたり）
 
-（10. エラーが出るので、バグを報告します
+10. 実行します
+
+（11. エラーが出るので、バグを報告します
 
 ## 使用方法（自作、またはUnityのモデルを使用する場合）
 
