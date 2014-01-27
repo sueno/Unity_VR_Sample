@@ -53,6 +53,8 @@ public class HandMotion : MonoBehaviour {
 	private MainCharacterController mainController;
 	
 	void Start () {
+		GlobalController gc = GlobalController.getInstance();
+		rootObject = gc.MainCharacter.Data.RootObject;
 		if (rootObject==null) {
 			controller = (CharacterController)GetComponent("CharacterController");
 			rootObject = this.gameObject;
