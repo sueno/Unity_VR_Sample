@@ -41,12 +41,10 @@ public class HandController{
 //		this.rootObj = GlobalController.getInstance().MainCharacter.Data.RootObject;
 		this.handIndex = 0<handIndex ? 1:-1;
 		this.handName = 0<handIndex ? "右":"左";
-		this.handRootName = 0<handIndex ? rightHandName:leftHandName;
-		this.handCollisionName = 0<handIndex ? rightHandCollisionName:leftHandCollisionName;
 		handRotationRivision = Quaternion.Euler(new Vector3(180f,30f*handIndex,-30f*handIndex));
 		fingerState = new RotationState(new Vector3(1,1,handIndex));
 //		holdState = new RotationState(new Vector3(1,1,1));
-		joints = new GameObject[jointNameList.Count];
+//		joints = new GameObject[jointNameList.Count];
 		for (int i=0;i<jointNameList.Count;i++) {
 			jointNameList[i] = handName+jointNameList[i];
 		}
@@ -57,6 +55,8 @@ public class HandController{
 	
 	public GameObject[] registGameObj(GameObject rootObj) {
 		this.rootObj = rootObj;
+		this.handRootName = 0<handIndex ? rightHandName:leftHandName;
+		this.handCollisionName = 0<handIndex ? rightHandCollisionName:leftHandCollisionName;
 		joints = new GameObject[jointNameList.Count];
 		registGameObj_recursion(rootObj);
 		return joints;
