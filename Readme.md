@@ -39,10 +39,10 @@ Unity4.3.2
 
 0. 必要なもの
  + Kinect for Windows SDK 1.8	（必須）
- + ZDK(Zigfu)		 （必須）
+ + ZDK_Unity40_1.1_trial.unitypackage (Zigfu)		 （必須）
  + Unity4.3.2		 （必須、Unity4.3以降であれば動作するはずです）
- + mmd-for-unity	 （MMDのモデルを動かしたい人向け）
- + LitJSON		 （iPhone,Androidのコントローラを使う場合必要）
+ + mmd-for-unity 2.1b（MMDのモデルを動かしたい人向け）
+ + LitJSON 0.7.0	 （iPhone,Androidのコントローラを使う場合必要）
  + websocket-sharp	 （マルチプレイしたい場合必要、サーバ側プログラムは今後公開予定）
  + Osulus rift developper tool kit ? (Oculus rift 使いたい人)
 
@@ -67,28 +67,28 @@ Unity4.3.2
 
 2. Assetsフォルダに、ZDK,Unity_VR_Sample,mmd-for-unity(,LitJSON,websocket-sharp,OVR)を入れます
 
-3. Assetsフォルダに、Kinectで動かしたいモデル（以後モデル）を入れます
+3. `Unity_VR_Sample/UseAnothoerLibraryClasses/`から、使っていないライブラリのクラスを消します（`Unity_VR_Sample/UseAnothoerLibraryClasses/websocket-sharp`,`Unity_VR_Sample/UseAnothoerLibraryClasses/LitJSON`あたり）
 
-4. モデルのpmxファイルを選択すると、Inspector（ウィンドウ右側）にmmd-for-unityのconvertなんちゃらが出てくるので、`AnimationType`を`Human Mecanim`にして`Convert Prefab`をおします。モデルがSceneに追加されれば成功です。
+4. Assetsフォルダに、Kinectで動かしたいモデル（以後モデル）を入れます
 
-4. `Unity_VR_Sample/Prefab/MainPlayer.prefab`をHierarchy（ウィンドウ左上）にドラッグ＆ドロップします
+5. モデルのpmxファイルを選択すると、Inspector（ウィンドウ右側）にmmd-for-unityのconvertなんちゃらが出てくるので、`AnimationType`を`Human Mecanim`にして`Convert Prefab`をおします。モデルがSceneに追加されれば成功です。
 
-5. Hierarchyにあるモデルを先ほどHierarchyに追加したMainPlayer内にドラッグ＆ドロップします
+6. `Unity_VR_Sample/Prefab/MainPlayer.prefab`をHierarchy（ウィンドウ左上）にドラッグ＆ドロップします
 
-6. Hierarchyのモデルに`Unity_VR_Sample/MainPlayer/MainCharactorController.cs`、`Unity_VR_Sample/UseAnothoerLibraryClasses/Zigfu/CustomZigSkeleton.cs`を追加（ドラッグ＆ドロップ）します。
+7. Hierarchyにあるモデルを先ほどHierarchyに追加したMainPlayer内にドラッグ＆ドロップします
 
-7. Hierarchyのモデルを選択し、Inspectorの`Main Charactor Controller`の項目を開き、次のように設定します
+8. Hierarchyのモデルに`Unity_VR_Sample/MainPlayer/MainCharactorController.cs`、`Unity_VR_Sample/UseAnothoerLibraryClasses/Zigfu/CustomZigSkeleton.cs`を追加（ドラッグ＆ドロップ）します。
+
+9. Hierarchyのモデルを選択し、Inspectorの`Main Charactor Controller`の項目を開き、次のように設定します
  + `Main Camera`の項目に、Hierarchyの`MainPlayer/cameraposition`をドラッグ＆ドロップします
  + `Data`の中の`RootObject`にHierarchyの`MainPlayer`をドラッグ＆ドロップします
  + `Main Player`にチェックを入れます
  + iPhone,Androidコントローラを使用する場合、`Use Remote Controller`にチェックを入れます
 
-8. Hierarchyの`MainPlayer/ZigFu`を選択し、Inspectorの`Zig Engage Single User`の項目を開き、次のように設定します
+10. Hierarchyの`MainPlayer/ZigFu`を選択し、Inspectorの`Zig Engage Single User`の項目を開き、次のように設定します
  + `Engaged Users`の中の`Element 0`にHierarchyのモデルをドラッグ＆ドロップします
 
-9. 使っていないライブラリのクラスを消します（`Unity_VR_Sample/UseAnothoerLibraryClasses/websocket-sharp`,`Unity_VR_Sample/UseAnothoerLibraryClasses/LitJSON`あたり）
-
-10. 実行します
+11. 実行します
 
 （11. エラーが出るので、バグを報告します
 
