@@ -80,6 +80,8 @@ Unity4.3.2
 7. Hierarchyのモデルを選択し、Inspectorの`Main Charactor Controller`の項目を開き、次のように設定します
  + `Main Camera`の項目に、Hierarchyの`MainPlayer/cameraposition`をドラッグ＆ドロップします
  + `Data`の中の`RootObject`にHierarchyの`MainPlayer`をドラッグ＆ドロップします
+ + `Main Player`にチェックを入れます
+ + iPhone,Androidコントローラを使用する場合、`Use Remote Controller`にチェックを入れます
 
 8. Hierarchyの`MainPlayer/ZigFu`を選択し、Inspectorの`Zig Engage Single User`の項目を開き、次のように設定します
  + `Engaged Users`の中の`Element 0`にHierarchyのモデルをドラッグ＆ドロップします
