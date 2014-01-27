@@ -61,8 +61,8 @@ public class MainCharacterController : MonoBehaviour {
 		data.init(playerID);
 
 		if (useRemoteController) {
-			data.__setJointObject((int)PlayerJoint.RightHand, null);
-			data.__setJointObject((int)PlayerJoint.LeftHand, null);
+			data.__setJointObject((int)PlayerJoint.RightWrist, null);
+			data.__setJointObject((int)PlayerJoint.LeftWrist, null);
 			data.MainPlayer.AddComponent<HandMotion>();
 			data.RightHandController.registGameObj(data.RootObject);
 			data.LeftHandController.registGameObj(data.RootObject);

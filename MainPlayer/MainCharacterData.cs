@@ -46,10 +46,22 @@ public class MainCharacterData {
 	
 	private int playerID = -1;
 	
-    private GameObject[] gameObjects;
+    public GameObject[] gameObjects;
     private Quaternion[] initialRotations;
 
 	private bool[] moveFilter;
+
+	
+	public HandController rightHandController = new HandController(1);
+	public HandController RightHandController {
+		set{rightHandController = value;}
+		get{return rightHandController;}
+	}
+	public HandController leftHandController = new HandController(-1);
+	public HandController LeftHandController {
+		set{leftHandController = value;}
+		get{return leftHandController;}
+	}
 	
     public GameObject Head = null;
     public GameObject Neck = null;
@@ -87,16 +99,6 @@ public class MainCharacterData {
 	public GameObject LeftEye = null;
 	public GameObject Expression = null;
 
-	public HandController rightHandController;
-	public HandController RightHandController {
-		set{rightHandController = value;}
-		get{return rightHandController;}
-	}
-	public HandController leftHandController;
-	public HandController LeftHandController {
-		set{leftHandController = value;}
-		get{return leftHandController;}
-	}
 	
     public MainCharacterData() {
 		
@@ -143,9 +145,6 @@ public class MainCharacterData {
 		gameObjects[(int)PlayerJoint.RightEye] = RightEye;
 		gameObjects[(int)PlayerJoint.LeftEye] = LeftEye;
 		gameObjects[(int)PlayerJoint.Expression] = Expression;
-
-		RightHandController = new HandController(rootObject,1);
-		LeftHandController = new HandController(rootObject,-1);
 
 		/**
 		 * Info : require mmd-for-unity. 

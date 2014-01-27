@@ -191,7 +191,9 @@ public class HandMotion : MonoBehaviour {
 			actionDic[(string)d["name"]]="move";break;
 		case "turn"		: this.turn(this.getPosition((string)d["name"]),int.Parse((string)d["x"]),int.Parse((string)d["y"]));
 			actionDic[(string)d["name"]]="turn";break;
+		case "R" 		:
 		case "right" 	: this.handRotation(rHandController,float.Parse((string)d[vecAxis[0]]),float.Parse((string)d[vecAxis[1]]),float.Parse((string)d[vecAxis[2]]));break;
+		case "L" 		:
 		case "left" 	: this.handRotation(lHandController,float.Parse((string)d[vecAxis[0]]),float.Parse((string)d[vecAxis[1]]),float.Parse((string)d[vecAxis[2]]));break;
 		case "anchorR"	: this.setAction(true,"ancer");break;
 		case "anchorL"	: this.setAction(false,"ancer");break;
