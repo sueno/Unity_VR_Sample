@@ -39,7 +39,7 @@ public class MMDJoint {
 			if (child.collider) {	
 				Collider c1 = rootObj.GetComponent<CharacterController>();
 				Collider[] collider2 = child.GetComponents<Collider>();
-				Debug.Log("IGNORE  : "+c1+"  ::  "+child.collider);
+//				Debug.Log("IGNORE  : "+c1+"  ::  "+child.collider);
 				//				foreach (Collider c1 in collider1) {
 				foreach (Collider c2 in collider2) {
 					Physics.IgnoreCollision(c1,c2);

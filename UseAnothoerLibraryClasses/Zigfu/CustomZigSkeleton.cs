@@ -259,8 +259,8 @@ public class CustomZigSkeleton : MonoBehaviour
 				transform.localPosition = new Vector3(0,(rootPosition.y*heightRivision)+heightRoot,0);
 			}else if (0.4f<height) {
 				Debug.Log("zig jump");
-				Debug.Log(height);
-				mainCharactorController.MoveStatus.setHeight(height*40f*heightRivision);
+//				Debug.Log(height);
+				mainCharactorController.MoveStatus.setHeight(height*4000f);
 			} else {
 				transform.localPosition = Vector3.zero;
 			}

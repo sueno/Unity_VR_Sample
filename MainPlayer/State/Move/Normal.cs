@@ -22,7 +22,8 @@ public class Normal : MoveStatus  {
 			height = player.transform.position.y;
 		} else if ( player.transform.position.y<height){
 			// touch ground
-			if ((controller.collisionFlags & CollisionFlags.Below) == 0) {
+			if (!controller.isGrounded) {
+				Debug.Log("no Ground");
 				dTime += Time.deltaTime;
 			}
 		} else {
