@@ -33,6 +33,9 @@ public class MainCharacterController : MonoBehaviour {
 	}
 
 	private RotateStatus rotateStatus = new RotateStatus();
+	public RotateStatus RotateStatus {
+		get{return rotateStatus;}
+	}
 
 	private RotationState[] jointRotations;
 
@@ -82,11 +85,14 @@ public class MainCharacterController : MonoBehaviour {
 //		moveAnimator = new MoveAnimatorController(ani);
 
 	}
-	
+	int kkk=0;
 	void LateUpdate () {
 		Vector3 moveDirection = moveStatus.getMove();
+		Debug.Log(kkk+" : "+moveDirection);kkk++;
 		controller.Move(moveDirection);
 //		moveAnimator.animation(moveDirection);
+		
+		data.rootObject.transform.Rotate(0f,rotateStatus.getRotate()*0.5f,0f);
 		
 		if (moveStatus is Fall && controller.isGrounded) {
 			moveStatus = new Normal(data.rootObject,dist);

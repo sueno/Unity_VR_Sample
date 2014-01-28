@@ -16,7 +16,7 @@ public class Normal : MoveStatus  {
 	public override void setMove (Vector3 rootPos, Vector3 pos) {
 		moveDirection = new Vector3((pos.x-rootPos.x)*dist,moveDirection.y,(rootPos.z-pos.z)*dist);
 	}
-		
+
 	public override Vector3 getMove() {
 		if (height == -1.0f) {
 			height = player.transform.position.y;
@@ -32,7 +32,9 @@ public class Normal : MoveStatus  {
 		height = player.transform.position.y;
 //		Debug.Log(player.transform.position.y+" :::: "+height);
 		moveDirection = new Vector3(moveDirection.x,(-9.8f*dTime*dTime)+(0<moveDirection.y ? moveDirection.y:0f) ,moveDirection.z);
-		return getVec ();
+		Vector3 move = getVec ();
+//		moveDirection = new Vector3(moveDirection.x, 0f ,moveDirection.z);
+		return move;
 	}
 
 	private Vector3 isGround(Vector3 pos, float range) {

@@ -124,32 +124,32 @@ public class HandMotion : MonoBehaviour {
 
 //		controller.Move(mainController.MoveStatus.getMove());
 		
-		if (mainController.MoveStatus is Fall && isGrounded()) {
-			mainController.MoveStatus = new Normal(rootObject,dist);
-		}
-		
-		// rotate
-		if (-1*rotateLimit<rotateDirection&&rotateDirection<rotateLimit) {
-			rootObject.transform.Rotate(0, rotateDirection , 0);
-			rotateDirection=0;
-		}
-		
-		// hand rotate
-		if (rHand!=null) {
-			rotateRHand = (rHandV) + transform.eulerAngles;
-			rHand.transform.eulerAngles = rotateRHand;//-rootR;
-		}
-		if (lHand!=null) {
-			rotateLHand = (lHandV) + transform.eulerAngles;
-			lHand.transform.eulerAngles = rotateLHand-rootR;
-		}
-		
-		// action
-		if (0<rHandAction.Count) action(rHand,objR,rHandAction.Dequeue());
-		if (0<lHandAction.Count) action(lHand,objL,lHandAction.Dequeue());
-		
-		
-		// GUI Out
+//		if (mainController.MoveStatus is Fall && isGrounded()) {
+//			mainController.MoveStatus = new Normal(rootObject,dist);
+//		}
+//		
+//		// rotate
+//		if (-1*rotateLimit<rotateDirection&&rotateDirection<rotateLimit) {
+//			rootObject.transform.Rotate(0, rotateDirection , 0);
+//			rotateDirection=0;
+//		}
+//		
+//		// hand rotate
+//		if (rHand!=null) {
+//			rotateRHand = (rHandV) + transform.eulerAngles;
+//			rHand.transform.eulerAngles = rotateRHand;//-rootR;
+//		}
+//		if (lHand!=null) {
+//			rotateLHand = (lHandV) + transform.eulerAngles;
+//			lHand.transform.eulerAngles = rotateLHand-rootR;
+//		}
+//		
+//		// action
+//		if (0<rHandAction.Count) action(rHand,objR,rHandAction.Dequeue());
+//		if (0<lHandAction.Count) action(lHand,objL,lHandAction.Dequeue());
+//		
+//		
+//		// GUI Out
 		setGUI ();
 	}
 	
@@ -257,6 +257,7 @@ public class HandMotion : MonoBehaviour {
 	// turn
 	void turn(Vector3 pos, int x, int z) {
 		rotateDirection = ((float)x-pos.x)*rotateRiv*0.1f;
+		mainController.RotateStatus.setRotate(pos.x,x);
 		if (mainController.MoveStatus is Fly && mainController.MoveStatus.getMoveDirection().y == 0.0f) {
 			mainController.MoveStatus.setMoveDirection(mainController.MoveStatus.getMoveDirection()+new Vector3(0.0f,(pos.z-z)*2.0f,0.0f));
 		}

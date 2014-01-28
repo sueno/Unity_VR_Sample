@@ -236,7 +236,6 @@ public class CustomZigSkeleton : MonoBehaviour
 		//add 14/1/22
 		jointRotations = mainCharactorController.getJointRotationManager();
 	}
-	
 	void UpdateRoot(Vector3 skelRoot)
 	{	
 		// +Z is backwards in OpenNI coordinates, so reverse it
@@ -257,14 +256,18 @@ public class CustomZigSkeleton : MonoBehaviour
 			float height = (rootPosition.y+heightRoot);
 			if (height<-0.3f) {
 				transform.localPosition = new Vector3(0,(rootPosition.y*heightRivision)+heightRoot,0);
+				jump = false;
 			}else if (0.4f<height) {
-				Debug.Log("zig jump");
+				if (!jump) {
 //				Debug.Log(height);
-				mainCharactorController.MoveStatus.setHeight(height*4000f);
+				mainCharactorController.MoveStatus.setHeight(height*100f);
+				}
+				jump = true;
 			} else {
 				transform.localPosition = Vector3.zero;
+				jump = false;
 			}
-			mainCharactorController.move(new Vector3(moveDirection.x,-9.8f,moveDirection.z));
+			mainCharactorController.move(new Vector3(moveDirection.x,0f,moveDirection.z));
 			moveDirection = rootPosition;
 			
 		}

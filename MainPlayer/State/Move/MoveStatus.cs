@@ -36,6 +36,8 @@ public abstract class MoveStatus {
 
 	//@TODO remove method
 	public void setHeight(float height) {
-		moveDirection = new Vector3(moveDirection.x,height-moveDirection.y,moveDirection.z);
+		if (moveDirection.y<=0) {
+			moveDirection = new Vector3(moveDirection.x,height-moveDirection.y,moveDirection.z);
+		}
 	}
 }

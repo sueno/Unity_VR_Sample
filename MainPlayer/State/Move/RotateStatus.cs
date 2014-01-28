@@ -11,8 +11,8 @@ public class RotateStatus {
 	public RotateStatus() {
 	}
 
-	public void setRotate(Vector3 rootPos, Vector3 pos) {
-		rotateDirection = (rootPos.x-pos.x)*rotateRiv;
+	public void setRotate(float rootx, float x) {
+		rotateDirection = (x-rootx)*rotateRiv;
 	}
 
 	public float getRotate() {
