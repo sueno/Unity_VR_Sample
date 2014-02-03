@@ -5,13 +5,14 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PlayerWeapon : WeaponStatus {
 
-	private float revSpeed = 0.03f;
+	private float revSpeed = 0.3f;
 	private float revPower = 1.5f;
-	private float revRotate = 40.0f;
+	private float revRotate = 50.0f;
 
 	protected float ps = 0.0f;
 	protected Vector3 point = Vector3.zero;
 	protected Vector3 pointroot = Vector3.zero;
+	protected float pointMagunitude = 0f;
 	protected float time = 0f;
 	protected float power = 0.0f;
 	protected Queue<Vector3> trails = new Queue<Vector3>();
@@ -33,15 +34,17 @@ public class PlayerWeapon : WeaponStatus {
 		} else {
 			this.time = 0.001f;
 			this.pointroot = point;
+			this.pointMagunitude = 0f;
 			this.trails.Clear();
 		}
-
+		
+		this.pointMagunitude += (this.point-point).magnitude;
 		this.point = point;
 		Vector3 dis = (this.pointroot - this.point);
-		
-		ps = (dis.magnitude / time) - (100.0f / weapon.weight);
+
+		ps = (this.pointMagunitude / this.time) - (100.0f / weapon.weight);
+//		Debug.Log((this.pointMagunitude / this.time) +"  ::  "+(100.0f / weapon.weight)+"    :::   "+ps);
 		ps = (-revSpeed * ps * ps) + revPower + System.Math.Abs (dis.normalized.y * 1.0f);
-//		Debug.Log("ps : "+(0<ps?ps:0));
 		return ps;
 	}
 
@@ -61,6 +64,7 @@ public class PlayerWeapon : WeaponStatus {
 		this.power = power*0.1f;
 		this.time = 0.001f;
 		this.pointroot = this.point;
+		Debug.Log(damage);
 		return (0 < damage ? damage : 0);
 	}
 

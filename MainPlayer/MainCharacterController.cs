@@ -85,26 +85,35 @@ public class MainCharacterController : MonoBehaviour {
 //		moveAnimator = new MoveAnimatorController(ani);
 
 	}
-	int kkk=0;
+
 	void LateUpdate () {
+
+		// move
 		Vector3 moveDirection = moveStatus.getMove();
-		Debug.Log(kkk+" : "+moveDirection);kkk++;
 		controller.Move(moveDirection);
-//		moveAnimator.animation(moveDirection);
-		
+
+		// rotate
 		data.rootObject.transform.Rotate(0f,rotateStatus.getRotate()*0.5f,0f);
-		
+
+		// landing
 		if (moveStatus is Fall && controller.isGrounded) {
 			moveStatus = new Normal(data.rootObject,dist);
 		}
+		
+		// Animation
+		long rotateFilter = 0;
+//		rotateFilter |= moveAnimator.animation(moveDirection);
 
+		// hand motion (iPhone, Android)
 		if (useRemoteController) {
 			data.RightHandController.rotateJoints();
 			data.LeftHandController.rotateJoints();
 		}
 
+		// skeleton motion (kinect)
 		for (int i=0; i<jointRotations.Length; i++) {
-			if (jointRotations[i].isChange()) {
+			long filter = (rotateFilter>>i) & 1;
+			if (filter && jointRotations[i].isChange()) {
 //				Debug.Log(i+"   "+jointRotations[i].getRotation());
 				data.setRotation(i, jointRotations[i].getRotation());
 			}

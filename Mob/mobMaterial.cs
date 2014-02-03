@@ -33,7 +33,7 @@ public class mobMaterial : MonoBehaviour , ICollisionMaterial{
 	}
 
 	void Start () {
-		this.tag = "Mob";
+//		this.tag = "Mob";
 		//	this.rigidbody.mass = mob.weight;
 	}
 	
@@ -73,7 +73,8 @@ public class mobMaterial : MonoBehaviour , ICollisionMaterial{
 			bool survive = this.owner.damage((int)dmg);
 			damageMessage((int)dmg);
 			if(!survive) {
-				Destroy(this.gameObject);
+				animation.Play("_big_damage");
+				Destroy(this.gameObject, 2);
 				dethEffect();
 			}
 		}

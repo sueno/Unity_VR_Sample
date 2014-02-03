@@ -47,16 +47,16 @@ public class MoveAnimatorController{
 	}
 
 
-	public bool animation (Vector3 moveDirection) {
+	public long animation (Vector3 moveDirection) {
 		if (moveDirection.x!=0 || moveDirection.z!=0) {
 			moveDirection *= 100f;
 			animator.SetFloat("MovementX", moveDirection.x);
 			animator.SetFloat("MovementZ", moveDirection.z);
-			return true;
+			return motionFilter.Filter;
 		} else {
 			animator.SetFloat("MovementX", moveDirection.x);
 			animator.SetFloat("MovementZ", moveDirection.z);
-			return false;
+			return 0;
 		}
 	}
 

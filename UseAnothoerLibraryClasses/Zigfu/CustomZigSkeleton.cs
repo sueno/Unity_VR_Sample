@@ -64,8 +64,8 @@ public class CustomZigSkeleton : MonoBehaviour
 	private int count_y = 0;
 	
 	public Vector3 revisionPosition = new Vector3(4,4,4);
-	public float heightRoot = 0.25f;
-	public float heightRivision = 0.5f;
+	public float heightRoot = 1.2f;
+	public float heightRivision = 1f;
 	
 	private Vector3[] rivisionRotations;
 	
@@ -251,22 +251,7 @@ public class CustomZigSkeleton : MonoBehaviour
 			}
 			moveDirection = Quaternion.Euler(0,transform.eulerAngles.y,0) * moveDirection;
 			
-			
-			//			Debug.Log(rootPosition);
-			float height = (rootPosition.y+heightRoot);
-			if (height<-0.3f) {
-				transform.localPosition = new Vector3(0,(rootPosition.y*heightRivision)+heightRoot,0);
-				jump = false;
-			}else if (0.4f<height) {
-				if (!jump) {
-//				Debug.Log(height);
-				mainCharactorController.MoveStatus.setHeight(height*100f);
-				}
-				jump = true;
-			} else {
-				transform.localPosition = Vector3.zero;
-				jump = false;
-			}
+
 			mainCharactorController.move(new Vector3(moveDirection.x,0f,moveDirection.z));
 			moveDirection = rootPosition;
 			
@@ -382,7 +367,36 @@ public class CustomZigSkeleton : MonoBehaviour
 				if (joint.GoodPosition) UpdatePosition(joint.Id, joint.Position);
 				if (joint.GoodRotation) UpdateRotation(joint.Id, joint.Rotation);
 			}
+
+			//@TODO add 2013/02/02
+			UpdateHeight(user.Skeleton[(int)ZigJointId.Waist].Position.y);
+
 		}
 	}
-	
+
+	private void UpdateHeight(float waistHeight) {
+		// waistHeight : (130 ~ 230) max : 600 min -600
+		// jumpborder
+		
+		// height : (1.3~2.3) max : 6, min : -6
+		float height = waistHeight*0.01f;
+		if (height*heightRivision<-6f) {
+			transform.localPosition = new Vector3(0f,-heightRoot,0f);
+			jump = false;
+		} else if (height<0f) {
+			transform.localPosition = new Vector3(0f,(height*heightRivision*0.2f),0f);
+			jump = false;
+		}else if (3.5f<height) {
+			if (!jump) {
+				Debug.Log(height);
+				mainCharactorController.MoveStatus.setHeight(height*6f);
+			}
+			jump = true;
+		} else {
+			transform.localPosition = Vector3.zero;
+			jump = false;
+		}
+
+	}
+
 }
