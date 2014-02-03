@@ -113,7 +113,7 @@ public class MainCharacterController : MonoBehaviour {
 		// skeleton motion (kinect)
 		for (int i=0; i<jointRotations.Length; i++) {
 			long filter = (rotateFilter>>i) & 1;
-			if (filter && jointRotations[i].isChange()) {
+			if (filter==1 && jointRotations[i].isChange()) {
 //				Debug.Log(i+"   "+jointRotations[i].getRotation());
 				data.setRotation(i, jointRotations[i].getRotation());
 			}
