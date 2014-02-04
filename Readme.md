@@ -11,7 +11,7 @@ UnityとKinect,iPhone,HMD(Oculus rift)等を用いてVR体験をするプロジ�
 - 使用するデバイス
  + Kinect	（必須）
  + iPhone	（任意、AppleDeveloperライセンスがあれば、RemoteController_for_Unityリポジトリからコントローラーのプログラムを使用できます）
- + Android	（任意、そのうちアプリをストアに上げます）
+ + Android	（任意、【13/02/05 更新】アプリ作ってもらいました（未完成）https://github.com/satanabe1/nohoPhoneController　アンドロイド用apkはこちらhttps://github.com/satanabe1/nohoPhoneController/tree/master/dist）
  + Oculus rift	（任意、そのうち本プロジェクト用にカスタマイズしたassetを公開します）
 
 - ゲームを想定した機能も多少用意しています  
