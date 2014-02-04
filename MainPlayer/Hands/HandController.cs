@@ -34,7 +34,7 @@ public class HandController{
 	private GameObject rootObj;
 	public GameObject handObj = null;
 	public GameObject[] joints;
-	public GameObject holdObj;
+	public IItem holdItem;
 	public HandCollision objCol;
 	
 	public HandController(int handIndex) {
@@ -83,25 +83,29 @@ public class HandController{
 		if (fingerState.isChange()) {
 			if (!objCol) {
 			} else if (fingerState.getEuler()!=Vector3.zero) {
-				holdObj = objCol.getCollisionObj();
-				if (holdObj) {
+				holdItem = objCol.getCollisionObj();
+				if (holdItem != null) {
+					GameObject holdObj = holdItem.getGameObject();
 					holdObj.transform.rotation = rootObj.transform.rotation;
 					holdObj.transform.parent = joints[5].transform;
 					holdObj.transform.localPosition = new Vector3(0.01f*handIndex,-0.03f,0f);
-					if (holdObj.rigidbody) {
-						holdObj.rigidbody.useGravity = false;
-						holdObj.rigidbody.isKinematic = true;
-					}
+//					if (holdObj.rigidbody) {
+//						holdObj.rigidbody.useGravity = false;
+//						holdObj.rigidbody.isKinematic = true;
+//					}
+					holdItem.hold();
 					Debug.Log("Hold : "+holdObj);
 
 				}
-			} else if (holdObj){
+			} else if (holdItem != null){
+				holdItem.release();
+				GameObject holdObj = holdItem.getGameObject();
 				holdObj.transform.parent = null;
-				if (holdObj.rigidbody) {
-					holdObj.rigidbody.useGravity = true;
-					holdObj.rigidbody.isKinematic = false;
-				}
-				holdObj = null;
+//				if (holdObj.rigidbody) {
+//					holdObj.rigidbody.useGravity = true;
+//					holdObj.rigidbody.isKinematic = false;
+//				}
+				holdItem = null;
 			}
 			foreach (GameObject joint in joints) {
 				if (joint)
@@ -109,8 +113,8 @@ public class HandController{
 			}
 		}
 		Vector3 rotateDirection = new Vector3(0,rootObj.transform.eulerAngles.y,0);
-		if (holdObj) {
-			holdObj.transform.rotation = Quaternion.Slerp(holdObj.transform.rotation, Quaternion.Euler(holdState.getEuler()+rotateDirection), 0.2f);
+		if (holdItem != null) {
+			holdItem.getGameObject().transform.rotation = Quaternion.Slerp(holdItem.getGameObject().transform.rotation, Quaternion.Euler(holdState.getEuler()+rotateDirection), 0.2f);
 		}
 		handObj.transform.rotation = Quaternion.Slerp(handObj.transform.rotation, Quaternion.Euler(holdState.getEuler()+rotateDirection)*handRotationRivision, 0.2f);//+rotateDirection);
 	}

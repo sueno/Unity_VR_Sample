@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -27,5 +28,9 @@ public class PlayerMaterial: Observer {
 		controller.Add(de);
 		AddUpdateAction(typeof(MobParts), obj => {controller.action((obj as ICollisionMaterial),(obj as ICollisionMaterial).ColObj);});
 		//		CollisionEventInterface ai2 = 
+	}
+
+	public void addUpdateAction(Type type, Action<object> updateAction) {
+		AddUpdateAction(type,updateAction);
 	}
 }

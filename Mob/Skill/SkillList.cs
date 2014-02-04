@@ -19,4 +19,13 @@ public class SkillList{
 		}
 		return null;
 	}
+
+	public void addSkill(SkillInterface skill) {
+		skillList.Add(skill);
+	}
+
+	public void insertSkill(int index, SkillInterface skill) {
+		int i = index<skillList.Count ? index : skillList.Count-1;
+		skillList.Insert(i,skill);
+	}
 }

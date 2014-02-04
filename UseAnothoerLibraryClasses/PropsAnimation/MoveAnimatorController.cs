@@ -56,7 +56,7 @@ public class MoveAnimatorController{
 		} else {
 			animator.SetFloat("MovementX", moveDirection.x);
 			animator.SetFloat("MovementZ", moveDirection.z);
-			return 0;
+			return -1;
 		}
 	}
 

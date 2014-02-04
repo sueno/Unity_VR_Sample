@@ -58,4 +58,13 @@ public class Mob{
 	public SkillInterface skillActivate (int i) {
 		return skillList.skillActivate(i);
 	}
+
+	
+	public void addSkill(SkillInterface skill) {
+		skillList.addSkill(skill);
+	}
+	
+	public void insertSkill(int index, SkillInterface skill) {
+		skillList.insertSkill(index,skill);
+	}
 }

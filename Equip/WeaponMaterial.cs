@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial{
+public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial, IItem{
 
 	//@TODO change private
 	public int playerID = -1;
@@ -47,9 +47,9 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 
 	void Start () {
 		this.name = this.w_name;
-		this.tag = this.tagName;
+//		this.tag = this.tagName;
 	
-		if (body == null) {
+		if (!body) {
 			body = this.gameObject;
 		}
 		
@@ -157,5 +157,19 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 			IWeaponStatus ws = wm.getWeaponStatus();
 			ws.revise(0.2f);
 		}
+	}
+
+	
+	public virtual void hold() {
+	}
+	
+	public virtual void release() {
+	}
+	
+	public virtual void use() {
+	}
+
+	public virtual GameObject getGameObject() {
+		return parentObj;
 	}
 }

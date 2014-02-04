@@ -29,11 +29,11 @@ public class HandCollision : MonoBehaviour {
 		colList.Remove(col.gameObject);
 	}
 
-	public GameObject getCollisionObj() {
+	public IItem getCollisionObj() {
 		return getComponent(colList);
 	}
 
-	private GameObject getComponent(IList<GameObject> objs) {
+	private IItem getComponent(IList<GameObject> objs) {
 //		Debug.Log("Component : "+obj);
 		foreach (GameObject obj in objs) {
 		//@TODO キャストなどできなくて条件分岐で妥協
@@ -49,11 +49,11 @@ public class HandCollision : MonoBehaviour {
 //				return (GameObject)o;
 //			}
 //		}
-		WeaponMaterial w = obj.GetComponent<WeaponMaterial>();
-		if (w) return w.ParentObj;
+			WeaponMaterial w = obj.GetComponent<WeaponMaterial>();
+			if (w) return w as IItem;
 
-		ItemMaterial i = obj.GetComponent<ItemMaterial>();
-		if (i) return i.ParentObj;
+			ItemMaterial i = obj.GetComponent<ItemMaterial>();
+			if (i) return i as IItem;
 
 		}
 		return null;

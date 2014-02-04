@@ -39,7 +39,7 @@ public class MainCharacterController : MonoBehaviour {
 
 	private RotationState[] jointRotations;
 
-//	private MoveAnimatorController moveAnimator;
+	private MoveAnimatorController moveAnimator;
 	
 	public void Awake() {
 		if (!data.MainPlayer) {
@@ -87,6 +87,7 @@ public class MainCharacterController : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+		Debug.Log("hogeeeee");
 
 		// move
 		Vector3 moveDirection = moveStatus.getMove();
@@ -101,14 +102,20 @@ public class MainCharacterController : MonoBehaviour {
 		}
 		
 		// Animation
-		long rotateFilter = 0;
-//		rotateFilter |= moveAnimator.animation(moveDirection);
+		long rotateFilter = -1;
+//		rotateFilter &= moveAnimator.animation(moveDirection);
 
 		// hand motion (iPhone, Android)
 		if (useRemoteController) {
 			data.RightHandController.rotateJoints();
 			data.LeftHandController.rotateJoints();
 		}
+
+		string a = "";
+		for (int ii=0; ii<64;ii++) {
+			a+=rotateFilter>>ii&1;
+		}
+		Debug.Log (a);
 
 		// skeleton motion (kinect)
 		for (int i=0; i<jointRotations.Length; i++) {
