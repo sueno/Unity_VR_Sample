@@ -56,7 +56,7 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 		trail_ctrl (trail_visible);
 		
 		bool f = GlobalController.getInstance().MainCharacter.MotionController.setMotionHandler((JointInterface)this,this.gameObject);
-		Debug.Log("regist "+f);
+		Debug.Log("regist weaponMaterial : "+f);
 		
 		
 		keepEffect = (GameObject)Resources.Load("Charge");

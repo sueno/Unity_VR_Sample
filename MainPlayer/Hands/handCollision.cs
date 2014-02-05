@@ -49,12 +49,13 @@ public class HandCollision : MonoBehaviour {
 //				return (GameObject)o;
 //			}
 //		}
+			if (obj) {
 			WeaponMaterial w = obj.GetComponent<WeaponMaterial>();
 			if (w) return w as IItem;
 
 			ItemMaterial i = obj.GetComponent<ItemMaterial>();
 			if (i) return i as IItem;
-
+			}
 		}
 		return null;
 	}

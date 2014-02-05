@@ -2,7 +2,7 @@
 using System.Collections;
 
 [System.Serializable]
-public class EatAbleItem : DefaultItem, IEatAbleItem {
+public class EatAbleItem : DefaultItem, IEatAbleItem, JointInterface {
 
 	public GameObject useEffect;
 
@@ -12,5 +12,30 @@ public class EatAbleItem : DefaultItem, IEatAbleItem {
 			GameObject effect = (GameObject)GameObject.Instantiate(useEffect, rootObj.transform.position, rootObj.transform.rotation);
 			Destroy(effect, 1f);
 		}
+		Destroy(this.gameObject,0.1f);
 	}
+
+	public virtual void hold() {
+		base.hold();
+		
+		bool f = GlobalController.getInstance().MainCharacter.MotionController.setMotionHandler((JointInterface)this,this.gameObject);
+		Debug.Log("regist iEatableItem : "+f);
+	}
+
+	protected virtual void Start() {
+	}
+
+	
+	public virtual void action(int i) {
+		Debug.Log("hold("+i+") : "+base.holding);
+		if (!base.holding) {
+			return;
+		}
+
+		if (i==3) {
+			this.use ();
+		}
+	}
+
+	public virtual void resetAction(){}
 }

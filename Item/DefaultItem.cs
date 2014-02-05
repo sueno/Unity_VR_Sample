@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DefaultItem : ItemMaterial, IUseAbleItem {
 
-	private bool holding = false;
+	protected bool holding = false;
 	private Queue<Vector3> positionQueue = new Queue<Vector3>();
 
 	public virtual void hold() {
@@ -13,6 +13,10 @@ public class DefaultItem : ItemMaterial, IUseAbleItem {
 	}
 
 	public virtual void release() {
+		if (!this) {
+			return;
+		}
+
 		base.release();
 		holding = false;
 		Vector3 force = Vector3.zero;

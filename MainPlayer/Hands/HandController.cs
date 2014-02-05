@@ -100,11 +100,13 @@ public class HandController{
 			} else if (holdItem != null){
 				holdItem.release();
 				GameObject holdObj = holdItem.getGameObject();
-				holdObj.transform.parent = null;
+				if (holdObj) {
+					holdObj.transform.parent = null;
 //				if (holdObj.rigidbody) {
 //					holdObj.rigidbody.useGravity = true;
 //					holdObj.rigidbody.isKinematic = false;
 //				}
+				}
 				holdItem = null;
 			}
 			foreach (GameObject joint in joints) {
@@ -113,7 +115,7 @@ public class HandController{
 			}
 		}
 		Vector3 rotateDirection = new Vector3(0,rootObj.transform.eulerAngles.y,0);
-		if (holdItem != null) {
+		if (holdItem != null && holdItem.getGameObject()) {
 			holdItem.getGameObject().transform.rotation = Quaternion.Slerp(holdItem.getGameObject().transform.rotation, Quaternion.Euler(holdState.getEuler()+rotateDirection), 0.2f);
 		}
 		handObj.transform.rotation = Quaternion.Slerp(handObj.transform.rotation, Quaternion.Euler(holdState.getEuler()+rotateDirection)*handRotationRivision, 0.2f);//+rotateDirection);

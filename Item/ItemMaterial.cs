@@ -15,16 +15,18 @@ public class ItemMaterial : MonoBehaviour, IItem {
 	}
 	
 	public virtual void release() {
-		rigidbody.useGravity = true;
-		rigidbody.isKinematic = false;
-		collider.isTrigger = false;
+		if (this) {
+			rigidbody.useGravity = true;
+			rigidbody.isKinematic = false;
+			collider.isTrigger = false;
+		}
 	}
 	
 	public virtual void use() {
 	}
 	
 	public virtual GameObject getGameObject() {
-		return this.gameObject;
+		return this ? this.gameObject:null;
 	}
 
 	protected virtual void Awake() {
