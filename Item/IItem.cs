@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IItem {
-	void hold();
-	void release();
+namespace Unity_VR.Item
+{
 
-	void use();
+    public interface IItem
+    {
+        void hold();
+        void release();
 
-	GameObject getGameObject();
-}
+        void use();
 
-public interface IUseAbleItem : IItem {
-}
+        GameObject getGameObject();
+    }
 
-public interface IEatAbleItem : IItem {
-}
+    public interface IUseAbleItem : IItem
+    {
+    }
 
-public interface IEquipAbleItem : IItem {
+    public interface IEatAbleItem : IItem
+    {
+    }
+
+    public interface IEquipAbleItem : IItem
+    {
+    }
 }

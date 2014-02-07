@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AnchorR : SingleAnchor {
+namespace Unity_VR.MainPlayer.State.Move
+{
 
-	public AnchorR(GameObject player, float dist, Vector3 point) : base (player, dist, point) {
-	}
+    public class AnchorR : SingleAnchor
+    {
+
+        public AnchorR(GameObject player, float dist, Vector3 point)
+            : base(player, dist, point)
+        {
+        }
+    }
 }

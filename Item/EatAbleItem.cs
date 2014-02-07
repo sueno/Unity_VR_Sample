@@ -1,41 +1,55 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using Unity_VR.Global;
+using Unity_VR.MainPlayer.Motion.Joint;
 
-[System.Serializable]
-public class EatAbleItem : DefaultItem, IEatAbleItem, JointInterface {
+namespace Unity_VR.Item
+{
 
-	public GameObject useEffect;
+    [System.Serializable]
+    public class EatAbleItem : DefaultItem, IEatAbleItem, JointInterface
+    {
 
-	public virtual void use() {
-		if (useEffect) {
-			GameObject rootObj = GlobalController.getInstance().MainCharacter.Data.RootObject;
-			GameObject effect = (GameObject)GameObject.Instantiate(useEffect, rootObj.transform.position, rootObj.transform.rotation);
-			Destroy(effect, 1f);
-		}
-		Destroy(this.gameObject,0.1f);
-	}
+        public GameObject useEffect;
 
-	public virtual void hold() {
-		base.hold();
-		
-		bool f = GlobalController.getInstance().MainCharacter.MotionController.setMotionHandler((JointInterface)this,this.gameObject);
-		Debug.Log("regist iEatableItem : "+f);
-	}
+        public virtual void use()
+        {
+            if (useEffect)
+            {
+                GameObject rootObj = GlobalController.getInstance().MainCharacter.Data.RootObject;
+                GameObject effect = (GameObject)GameObject.Instantiate(useEffect, rootObj.transform.position, rootObj.transform.rotation);
+                Destroy(effect, 1f);
+            }
+            Destroy(this.gameObject, 0.1f);
+        }
 
-	protected virtual void Start() {
-	}
+        public virtual void hold()
+        {
+            base.hold();
 
-	
-	public virtual void action(int i) {
-		Debug.Log("hold("+i+") : "+base.holding);
-		if (!base.holding) {
-			return;
-		}
+            bool f = GlobalController.getInstance().MainCharacter.MotionController.setMotionHandler((JointInterface)this, this.gameObject);
+            Debug.Log("regist iEatableItem : " + f);
+        }
 
-		if (i==3) {
-			this.use ();
-		}
-	}
+        protected virtual void Start()
+        {
+        }
 
-	public virtual void resetAction(){}
+
+        public virtual void action(int i)
+        {
+            Debug.Log("hold(" + i + ") : " + base.holding);
+            if (!base.holding)
+            {
+                return;
+            }
+
+            if (i == 3)
+            {
+                this.use();
+            }
+        }
+
+        public virtual void resetAction() { }
+    }
 }

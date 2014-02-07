@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[System.Serializable]
-public class RotateStatus {
+namespace Unity_VR.MainPlayer.State.Move
+{
 
-	public float rotateRiv = 0.1f;
-	public float rotateLimit = 40.0f;
-	private float rotateDirection = 0.0f;
+    [System.Serializable]
+    public class RotateStatus
+    {
 
-	public RotateStatus() {
-	}
+        public float rotateRiv = 0.1f;
+        public float rotateLimit = 40.0f;
+        private float rotateDirection = 0.0f;
 
-	public void setRotate(float rootx, float x) {
-		rotateDirection = (x-rootx)*rotateRiv;
-	}
+        public RotateStatus()
+        {
+        }
 
-	public float getRotate() {
-		if (-1*rotateLimit<rotateDirection&&rotateDirection<rotateLimit) {
-			float r = rotateDirection;
-			rotateDirection=0;
-			return r;
-		}
-		return 0f;
-	}
+        public void setRotate(float rootx, float x)
+        {
+            rotateDirection = (x - rootx) * rotateRiv;
+        }
+
+        public float getRotate()
+        {
+            if (-1 * rotateLimit < rotateDirection && rotateDirection < rotateLimit)
+            {
+                float r = rotateDirection;
+                rotateDirection = 0;
+                return r;
+            }
+            return 0f;
+        }
+    }
 }

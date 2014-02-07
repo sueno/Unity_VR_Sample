@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity_VR.Mobs;
+using Unity_VR.Global;
 
 public class LifeGUI : MonoBehaviour {
 

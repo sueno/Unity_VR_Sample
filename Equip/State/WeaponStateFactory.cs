@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WeaponStateFactory {
+namespace Unity_VR.Equip.State
+{
 
-	public static IWeaponStatus newInstance(int player) {
-		IWeaponStatus state = null;
-		if (0==player) {
-			state = new PlayerWeapon();
-		} else {
-			state = new DefaultWeaponStatus();
-		}
-		return state;
-	}
+    public class WeaponStateFactory
+    {
+
+        public static IWeaponStatus newInstance(int player)
+        {
+            IWeaponStatus state = null;
+            if (0 == player)
+            {
+                state = new PlayerWeapon();
+            }
+            else
+            {
+                state = new DefaultWeaponStatus();
+            }
+            return state;
+        }
+    }
 }

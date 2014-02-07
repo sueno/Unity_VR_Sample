@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Unity_VR.Mobs;
+using Unity_VR.Global;
+using Unity_VR.Equip;
 
 public class DamageEvent : CollisionEventInterface {
 

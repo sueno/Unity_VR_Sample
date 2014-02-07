@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity_VR.Mobs.Skill;
 
 public class TestSkill : SkillInterface {
 

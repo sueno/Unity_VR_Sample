@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity_VR.Global;
 
 public class Enemy_1 : MonoBehaviour {
 	

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-enum DamageType {
-	Player,
-	Effect,
-	Enemy1,
+namespace Unity_VR.Equip.State
+{
+
+    enum DamageType
+    {
+        Player,
+        Effect,
+        Enemy1,
+    }
 }

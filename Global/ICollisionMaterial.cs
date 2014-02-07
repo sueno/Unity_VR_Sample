@@ -1,26 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity_VR.Mobs;
 
-public interface ICollisionMaterial {
-	
-	int PlayerID {
-		get;
-	}
-	
-	string name {
-		get;
-	}
+namespace Unity_VR.Global
+{
 
-	ICollisionMaterial ColObj {
-		get;
-	}
+    public interface ICollisionMaterial
+    {
 
-	GameObject ParentObj {
-		get;
-	}
+        int PlayerID
+        {
+            get;
+        }
 
-	Mob Owner {
-		set;
-		get;
-	}
+        string name
+        {
+            get;
+        }
+
+        ICollisionMaterial ColObj
+        {
+            get;
+        }
+
+        GameObject ParentObj
+        {
+            get;
+        }
+
+        Mob Owner
+        {
+            set;
+            get;
+        }
+    }
 }

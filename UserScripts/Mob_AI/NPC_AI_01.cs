@@ -2,6 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity_VR.Mobs;
+using Unity_VR.MainPlayer;
+using Unity_VR.Global;
+using Unity_VR.UseAnothoerLibraryClasses.mmdForUnity.ExpressionState;
 
 public class NPC_AI_01 : MonoBehaviour , CollisionEventInterface{
 

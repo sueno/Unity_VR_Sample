@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface JointInterface {
-	void action(int i);
-	void resetAction();
+namespace Unity_VR.MainPlayer.Motion.Joint
+{
+
+    public interface JointInterface
+    {
+        void action(int i);
+        void resetAction();
+    }
 }

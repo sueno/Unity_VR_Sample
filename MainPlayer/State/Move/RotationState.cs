@@ -1,42 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[System.Serializable]
-public class RotationState {
+namespace Unity_VR.MainPlayer.State.Move
+{
 
-	private Quaternion rotation = Quaternion.Euler(Vector3.zero);
-	public Vector3 euler = Vector3.zero;
-	private bool changed = false;
-	public Vector3 revisionEuler = Vector3.one;
+    [System.Serializable]
+    public class RotationState
+    {
 
-	public RotationState () {
-	}
+        private Quaternion rotation = Quaternion.Euler(Vector3.zero);
+        public Vector3 euler = Vector3.zero;
+        private bool changed = false;
+        public Vector3 revisionEuler = Vector3.one;
 
-	public RotationState (Vector3 rev) {
-		revisionEuler = rev;
-	}
+        public RotationState()
+        {
+        }
 
-	public void setEuler(Vector3 rot) {
-		euler = new Vector3(rot.x*revisionEuler.x,rot.y*revisionEuler.y,rot.z*revisionEuler.z);
-		changed = true;
-	}
+        public RotationState(Vector3 rev)
+        {
+            revisionEuler = rev;
+        }
 
-	public Vector3 getEuler() {
-		changed = false;
-		return euler;
-	}
+        public void setEuler(Vector3 rot)
+        {
+            euler = new Vector3(rot.x * revisionEuler.x, rot.y * revisionEuler.y, rot.z * revisionEuler.z);
+            changed = true;
+        }
 
-	public bool isChange() {
-		return changed;
-	}
+        public Vector3 getEuler()
+        {
+            changed = false;
+            return euler;
+        }
+
+        public bool isChange()
+        {
+            return changed;
+        }
 
 
-	public void setRotation(Quaternion rotate) {
-		rotation = rotate;
-		changed = true;
-	}
+        public void setRotation(Quaternion rotate)
+        {
+            rotation = rotate;
+            changed = true;
+        }
 
-	public Quaternion getRotation() {
-		return rotation;
-	}
+        public Quaternion getRotation()
+        {
+            return rotation;
+        }
+    }
 }

@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrailController {
+namespace Unity_VR.Equip.State
+{
+
+    public class TrailController
+    {
 
 
+    }
 }

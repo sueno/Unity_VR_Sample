@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity_VR.MainPlayer.Motion;
 
-[System.Serializable]
-public class MoveAnimatorController{
+namespace Unity_VR.UseAnothoerLibraryClasses.PropsAnimation
+{
 
-	Vector3 moveDirection = Vector3.zero;
-	
-	Animator animator;
+    [System.Serializable]
+    public class MoveAnimatorController
+    {
 
-	private static MotionFilter motionFilter = new MotionFilter(
-		new bool[] {
+        Vector3 moveDirection = Vector3.zero;
+
+        Animator animator;
+
+        private static MotionFilter motionFilter = new MotionFilter(
+            new bool[] {
 		true,	//		Head,
 		true,	//		Neck,
 		true,	//		Torso,
@@ -42,26 +47,33 @@ public class MoveAnimatorController{
 		true,	//		Expression
 	});
 
-	public MoveAnimatorController (Animator animator) {
-		this.animator = animator;
-	}
+        public MoveAnimatorController(Animator animator)
+        {
+            this.animator = animator;
+        }
 
 
-	public long animation (Vector3 moveDirection) {
-		if (moveDirection.x!=0 || moveDirection.z!=0) {
-			moveDirection *= 100f;
-			animator.SetFloat("MovementX", moveDirection.x);
-			animator.SetFloat("MovementZ", moveDirection.z);
-			return motionFilter.Filter;
-		} else {
-			animator.SetFloat("MovementX", moveDirection.x);
-			animator.SetFloat("MovementZ", moveDirection.z);
-			return -1;
-		}
-	}
+        public long animation(Vector3 moveDirection)
+        {
+            if (moveDirection.x != 0 || moveDirection.z != 0)
+            {
+                moveDirection *= 100f;
+                animator.SetFloat("MovementX", moveDirection.x);
+                animator.SetFloat("MovementZ", moveDirection.z);
+                return motionFilter.Filter;
+            }
+            else
+            {
+                animator.SetFloat("MovementX", moveDirection.x);
+                animator.SetFloat("MovementZ", moveDirection.z);
+                return -1;
+            }
+        }
 
 
-	public long filter() {
-		return motionFilter.Filter;
-	}
+        public long filter()
+        {
+            return motionFilter.Filter;
+        }
+    }
 }

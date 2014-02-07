@@ -2,20 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 
-enum Enemy {
-	Skeleton1,
-}
+namespace Unity_VR.Global
+{
 
-public class EnemyList {
+    enum Enemy
+    {
+        Skeleton1,
+    }
 
-	private static IList<GameObject> enemyList = new List<GameObject>();
+    public class EnemyList
+    {
 
-	static EnemyList() {
+        private static IList<GameObject> enemyList = new List<GameObject>();
 
-	}
+        static EnemyList()
+        {
 
-	public GameObject Get(int index) {
-		return null;
-	}
+        }
 
+        public GameObject Get(int index)
+        {
+            return null;
+        }
+
+    }
 }

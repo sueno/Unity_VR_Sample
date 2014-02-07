@@ -1,158 +1,192 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using Unity_VR.Global;
+using Unity_VR.MainPlayer.Motion;
+using Unity_VR.MainPlayer.State.Move;
+using Unity_VR.UseAnothoerLibraryClasses.LitJSON;
+using Unity_VR.UseAnothoerLibraryClasses.PropsAnimation;
 
-[System.Serializable]
-public class MainCharacterController : MonoBehaviour {
+namespace Unity_VR.MainPlayer
+{
 
-	public GameObject mainCamera;
+    [System.Serializable]
+    public class MainCharacterController : MonoBehaviour
+    {
 
-	public bool mainPlayer = false;
-	public float dist = 0.02f;
-	public bool useRemoteController = false;
-	
-	public MainCharacterData data = new MainCharacterData();
-	public MainCharacterData Data {
-		get{return this.data;}
-	}
+        public GameObject mainCamera;
 
-	private MainMotionController motionController;
-	public MainMotionController MotionController {
-		get{return this.motionController;}
-	}
-	
-	private CharacterController controller;
-	public CharacterController Controller {
-		get{return controller;}
-	}
+        public bool mainPlayer = false;
+        public float dist = 0.02f;
+        public bool useRemoteController = false;
 
-	private MoveStatus moveStatus = null;
-	public MoveStatus MoveStatus {
-		set{this.moveStatus = value;}
-		get{return this.moveStatus;}
-	}
+        public MainCharacterData data = new MainCharacterData();
+        public MainCharacterData Data
+        {
+            get { return this.data; }
+        }
 
-	private RotateStatus rotateStatus = new RotateStatus();
-	public RotateStatus RotateStatus {
-		get{return rotateStatus;}
-	}
+        private MainMotionController motionController;
+        public MainMotionController MotionController
+        {
+            get { return this.motionController; }
+        }
 
-	private RotationState[] jointRotations;
+        private CharacterController controller;
+        public CharacterController Controller
+        {
+            get { return controller; }
+        }
 
-	private MoveAnimatorController moveAnimator;
-	
-	public void Awake() {
-		if (!data.MainPlayer) {
-			data.MainPlayer = this.gameObject;
-		}
-		if (!data.RootObject) {
-			data.RootObject = this.gameObject;
-		}
+        private MoveStatus moveStatus = null;
+        public MoveStatus MoveStatus
+        {
+            set { this.moveStatus = value; }
+            get { return this.moveStatus; }
+        }
 
-		controller = (CharacterController)data.RootObject.GetComponent<CharacterController>();
+        private RotateStatus rotateStatus = new RotateStatus();
+        public RotateStatus RotateStatus
+        {
+            get { return rotateStatus; }
+        }
 
-		moveStatus = new Normal(data.RootObject,dist);
+        private RotationState[] jointRotations;
 
-		int playerID = -1;
-		if (mainPlayer) {
-			GlobalController.getInstance().MainCharacter = this;
-			playerID = 0;
-			motionController = MainMotionController.AddComponent(data.MainPlayer,this);
-		} else {
-			playerID = GlobalController.getInstance().addPlayer(this);
-		}
-		data.init(playerID);
+        private MoveAnimatorController moveAnimator;
 
-		if (useRemoteController) {
-			data.__setJointObject((int)PlayerJoint.RightWrist, null);
-			data.__setJointObject((int)PlayerJoint.LeftWrist, null);
-			data.MainPlayer.AddComponent<HandMotion>();
-			data.RightHandController.registGameObj(data.RootObject);
-			data.LeftHandController.registGameObj(data.RootObject);
-		}
+        public void Awake()
+        {
+            if (!data.MainPlayer)
+            {
+                data.MainPlayer = this.gameObject;
+            }
+            if (!data.RootObject)
+            {
+                data.RootObject = this.gameObject;
+            }
 
-		jointRotations = new RotationState[(int)(Enum.GetNames(typeof(PlayerJoint)).Length)];
-		for (int i=0; i<jointRotations.Length; i++) {
-			jointRotations[i] = new RotationState();
-		}
-	}
-	
-	void Start () {
-		if (mainCamera) {
-			CameraPosition.AddComponent(mainCamera,data.RootObject,data.getJoint((int)PlayerJoint.Head),new Vector3(0f,0.11f,-0.037f));
-		}
-//		Animator ani = GetComponent<Animator>();
-//		moveAnimator = new MoveAnimatorController(ani);
+            controller = (CharacterController)data.RootObject.GetComponent<CharacterController>();
 
-	}
+            moveStatus = new Normal(data.RootObject, dist);
 
-	void LateUpdate () {
-		Debug.Log("hogeeeee");
+            int playerID = -1;
+            if (mainPlayer)
+            {
+                GlobalController.getInstance().MainCharacter = this;
+                playerID = 0;
+                motionController = MainMotionController.AddComponent(data.MainPlayer, this);
+            }
+            else
+            {
+                playerID = GlobalController.getInstance().addPlayer(this);
+            }
+            data.init(playerID);
 
-		// move
-		Vector3 moveDirection = moveStatus.getMove();
-		controller.Move(moveDirection);
+            if (useRemoteController)
+            {
+                data.__setJointObject((int)PlayerJoint.RightWrist, null);
+                data.__setJointObject((int)PlayerJoint.LeftWrist, null);
+                data.MainPlayer.AddComponent<HandMotion>();
+                data.RightHandController.registGameObj(data.RootObject);
+                data.LeftHandController.registGameObj(data.RootObject);
+            }
 
-		// rotate
-		data.rootObject.transform.Rotate(0f,rotateStatus.getRotate()*0.5f,0f);
+            jointRotations = new RotationState[(int)(Enum.GetNames(typeof(PlayerJoint)).Length)];
+            for (int i = 0; i < jointRotations.Length; i++)
+            {
+                jointRotations[i] = new RotationState();
+            }
+        }
 
-		// landing
-		if (moveStatus is Fall && controller.isGrounded) {
-			moveStatus = new Normal(data.rootObject,dist);
-		}
-		
-		// Animation
-		long rotateFilter = -1;
-//		rotateFilter &= moveAnimator.animation(moveDirection);
+        void Start()
+        {
+            if (mainCamera)
+            {
+                CameraPosition.AddComponent(mainCamera, data.RootObject, data.getJoint((int)PlayerJoint.Head), new Vector3(0f, 0.11f, -0.037f));
+            }
+            //		Animator ani = GetComponent<Animator>();
+            //		moveAnimator = new MoveAnimatorController(ani);
 
-		// hand motion (iPhone, Android)
-		if (useRemoteController) {
-			data.RightHandController.rotateJoints();
-			data.LeftHandController.rotateJoints();
-		}
+        }
 
-		string a = "";
-		for (int ii=0; ii<64;ii++) {
-			a+=rotateFilter>>ii&1;
-		}
-		Debug.Log (a);
+        void LateUpdate()
+        {
+            Debug.Log("hogeeeee");
 
-		// skeleton motion (kinect)
-		for (int i=0; i<jointRotations.Length; i++) {
-			long filter = (rotateFilter>>i) & 1;
-			if (filter==1 && jointRotations[i].isChange()) {
-//				Debug.Log(i+"   "+jointRotations[i].getRotation());
-				data.setRotation(i, jointRotations[i].getRotation());
-			}
-		}
-	}
+            // move
+            Vector3 moveDirection = moveStatus.getMove();
+            controller.Move(moveDirection);
 
-	public void move(Vector3 vec) {
-		controller.Move(vec);
-	}
-	
-	public void rotate(Vector3 eulerAngle) {
-		data.RootObject.transform.Rotate(eulerAngle);
-	}
+            // rotate
+            data.rootObject.transform.Rotate(0f, rotateStatus.getRotate() * 0.5f, 0f);
+
+            // landing
+            if (moveStatus is Fall && controller.isGrounded)
+            {
+                moveStatus = new Normal(data.rootObject, dist);
+            }
+
+            // Animation
+            long rotateFilter = -1;
+            //		rotateFilter &= moveAnimator.animation(moveDirection);
+
+            // hand motion (iPhone, Android)
+            if (useRemoteController)
+            {
+                data.RightHandController.rotateJoints();
+                data.LeftHandController.rotateJoints();
+            }
+
+            string a = "";
+            for (int ii = 0; ii < 64; ii++)
+            {
+                a += rotateFilter >> ii & 1;
+            }
+            Debug.Log(a);
+
+            // skeleton motion (kinect)
+            for (int i = 0; i < jointRotations.Length; i++)
+            {
+                long filter = (rotateFilter >> i) & 1;
+                if (filter == 1 && jointRotations[i].isChange())
+                {
+                    //				Debug.Log(i+"   "+jointRotations[i].getRotation());
+                    data.setRotation(i, jointRotations[i].getRotation());
+                }
+            }
+        }
+
+        public void move(Vector3 vec)
+        {
+            controller.Move(vec);
+        }
+
+        public void rotate(Vector3 eulerAngle)
+        {
+            data.RootObject.transform.Rotate(eulerAngle);
+        }
 
 
-	public RotationState[] getJointRotationManager() {
-		return jointRotations;
-	}
-//	public GameObject getJoint(int i) {
-//		return data.getJoint(i);
-//	}
-//	public void setPosition(int i, Vector3 position) {
-//		data.setPosition(i,position);
-//	}
-//	
-//	public void setAngle(int i, Vector3 eulerAngle) {
-//		data.setAngle(i,eulerAngle);
-//	}
-//	
-//	public void setRotation(int i, Quaternion rotation) {
-//		data.setRotation(i,rotation);
-//	}
-	
-	
+        public RotationState[] getJointRotationManager()
+        {
+            return jointRotations;
+        }
+        //	public GameObject getJoint(int i) {
+        //		return data.getJoint(i);
+        //	}
+        //	public void setPosition(int i, Vector3 position) {
+        //		data.setPosition(i,position);
+        //	}
+        //	
+        //	public void setAngle(int i, Vector3 eulerAngle) {
+        //		data.setAngle(i,eulerAngle);
+        //	}
+        //	
+        //	public void setRotation(int i, Quaternion rotation) {
+        //		data.setRotation(i,rotation);
+        //	}
+
+
+    }
 }
