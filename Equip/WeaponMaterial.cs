@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial, IItem{
+public class WeaponMaterial : DefaultItem, JointInterface, ICollisionMaterial{
 
 	//@TODO change private
 	public int playerID = -1;
@@ -39,18 +39,27 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 	public GameObject collisionEffect;
 	public GameObject hitEffect;
 
-	private IWeaponStatus weaponState;
+	public IWeaponStatus weaponState;
 
 	public GameObject ParentObj {
 		get{return parentObj;}
 	}
 
+	void Awake() {
+		base.Awake();
+	}
+
 	void Start () {
+		base.Start();
+
 		this.name = this.w_name;
 //		this.tag = this.tagName;
 	
 		if (!body) {
 			body = this.gameObject;
+		}
+		if (!parentObj) {
+			parentObj = this.gameObject;
 		}
 		
 		trail_ctrl (trail_visible);
@@ -63,8 +72,11 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 		collisionEffect = (GameObject)Resources.Load("CollisionEffect");
 		hitEffect = (GameObject)Resources.Load("HitEffect");
 
-		weaponState = WeaponStateFactory.newInstance(playerID);
+		if (weaponState == null) {
+			weaponState = WeaponStateFactory.newInstance(playerID);
+		}
 		weaponState.init(weapon,owner);
+		Debug.Log(weaponState);
 
 		if (trail&&keepEffect&&body) {
 			isActive = true;
@@ -72,6 +84,7 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 	}
 
 	void Update () {
+		base.Update();
 //		bool flag = addPower (body.transform.position);
 		bool flag = 0<weaponState.calc(Time.deltaTime,body.transform.position);
 		if (flag != trail_visible) {
@@ -159,17 +172,13 @@ public class WeaponMaterial : MonoBehaviour , JointInterface, ICollisionMaterial
 		}
 	}
 
-	
-	public virtual void hold() {
-	}
-	
-	public virtual void release() {
-	}
-	
-	public virtual void use() {
-	}
-
 	public virtual GameObject getGameObject() {
 		return parentObj;
+	}
+
+	public override void release() {
+		base.release();
+		collider.isTrigger = true;
+		Debug.Log("Trigger : "+collider.isTrigger);
 	}
 }

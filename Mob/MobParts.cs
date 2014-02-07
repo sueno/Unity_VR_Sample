@@ -65,8 +65,15 @@ public class MobParts : Observable, ICollisionMaterial
 
 	void damageEffect (GameObject obj, Vector3 pos)
 	{
+		if (playerID==0) {
+			return;
+		}
+		
+		WeaponMaterial wm = obj.GetComponent<WeaponMaterial>();
+		if(wm!=null && 0<=wm.PlayerID){
+
 //		Debug.Log ("hoge-----"+obj.name+"  Tag: " +obj.tag + "  igno: "+ignoreObjTag +" "+(obj.tag==ignoreObjTag)+"  eff: "+(effObj==null?"null":effObj.name));
-		if (!(obj.tag == ignoreObjTag) && effObj != null) {
+//		if (!(obj.tag == ignoreObjTag) && effObj != null) {
 			Vector3 damagePosition = (Vector3)damagePositions [obj.name];
 			Vector3 vec = (pos - damagePosition);
 			Vector3 nvec = vec.normalized / 10.0f;
@@ -116,7 +123,7 @@ public class MobParts : Observable, ICollisionMaterial
 		WeaponMaterial wm = obj.GetComponent<WeaponMaterial>();
 
 		if (wm) {
-			if (wm.PlayerID == this.playerID) {
+			if (wm.PlayerID >= this.playerID) {
 				return null;
 			}
 

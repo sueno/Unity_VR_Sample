@@ -44,7 +44,7 @@ public class MainCharacterData {
 
 	public PlayerMaterial playerStatus = new PlayerMaterial();
 	
-	private int playerID = -1;
+	public int playerID = -1;
 	
     public GameObject[] gameObjects;
     private Quaternion[] initialRotations;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class mobMaterial : MonoBehaviour , ICollisionMaterial{
 	
-	private int playerID = -1;
+	public int playerID = -1;
 	public int PlayerID {
 		set {playerID = value;}
 		get {return playerID;}
@@ -43,6 +43,17 @@ public class mobMaterial : MonoBehaviour , ICollisionMaterial{
 		}
 		
 	}
+
+//	void OnControllerColliderHit(ControllerColliderHit col) {
+//		damage(col.gameObject);
+//		//damage(col);
+//		nockbak(col.gameObject);
+//		
+//		damagePositions[col.gameObject.name] = col.transform.position;
+//		damageEffect(col.gameObject,col.transform.position);
+//		Debug.Log("hit "+this.gameObject+" ("+col.gameObject);
+//
+//	}
 	
 	void OnCollisionEnter(Collision col){
 		damage(col.gameObject);
@@ -66,15 +77,17 @@ public class mobMaterial : MonoBehaviour , ICollisionMaterial{
 	
 	
 	void damage(GameObject obj) {
-		if(obj.tag == damageObjTag){
+		Debug.Log("Damage    hit   "+obj);
+		WeaponMaterial wm = obj.GetComponent<WeaponMaterial>();
+		if(wm!=null && 0<=wm.PlayerID){
 			float dmg = obj.GetComponent<WeaponMaterial>().getDamage();
 			//		var survive = this.gameObject.GetComponent(MobMaterial).mob.damage(dmg);
 //			Debug.Log("DAMAGE : "+(int)dmg);
 			bool survive = this.owner.damage((int)dmg);
 			damageMessage((int)dmg);
 			if(!survive) {
-				animation.Play("_big_damage");
-				Destroy(this.gameObject, 2);
+//				animation.Play("_big_damage");
+				Destroy(this.gameObject, 0);
 				dethEffect();
 			}
 		}

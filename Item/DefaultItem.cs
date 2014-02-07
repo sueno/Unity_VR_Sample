@@ -10,6 +10,7 @@ public class DefaultItem : ItemMaterial, IUseAbleItem {
 	public virtual void hold() {
 		base.hold();
 		holding = true;
+		Debug.Log("hold ; "+holding);
 	}
 
 	public virtual void release() {
@@ -40,7 +41,7 @@ public class DefaultItem : ItemMaterial, IUseAbleItem {
 		if (!holding) {
 			return;
 		}
-
+//		Debug.Log("holding...");
 		if (10<positionQueue.Count) {
 			positionQueue.Dequeue();
 		}

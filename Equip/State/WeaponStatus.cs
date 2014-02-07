@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public abstract class WeaponStatus : IWeaponStatus {
 
 	protected Weapon weapon;
 	protected Mob mob;
 	protected float damage;
-	protected float revision;
+	protected float revision = 1f;
 
 	public virtual void init(Weapon weapon, Mob mob) {
 		this.weapon = weapon;
@@ -15,7 +16,7 @@ public abstract class WeaponStatus : IWeaponStatus {
 	}
 
 	public virtual float calc(float time, Vector3 point) {
-		damage = mob.str;
+		damage = weapon.attack;
 		return damage;
 	}
 
