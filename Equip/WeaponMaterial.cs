@@ -54,14 +54,15 @@ namespace Unity_VR.Equip
 
         public IWeaponStatus weaponState;
 
-        public GameObject ParentObj
+        public override GameObject ParentObj
         {
-            get { return parentObj; }
-        }
-
-        void Awake()
-        {
-            base.Awake();
+			get { return parentObj; }
+		}
+		
+		void Awake()
+		{
+			base.Awake();
+			rigidbody.useGravity = false;
         }
 
         void Start()
@@ -214,16 +215,21 @@ namespace Unity_VR.Equip
             }
         }
 
-        public virtual GameObject getGameObject()
+        public override GameObject getGameObject()
         {
             return parentObj;
         }
 
+		public override void hold ()
+		{
+			base.hold();
+		}
+
         public override void release()
         {
             base.release();
-            collider.isTrigger = true;
-            Debug.Log("Trigger : " + collider.isTrigger);
+//            collider.isTrigger = true;
+//            Debug.Log("Trigger : " + collider.isTrigger);
         }
     }
 }

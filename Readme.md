@@ -27,7 +27,7 @@ UnityとKinect,iPhone,HMD(Oculus rift)等を用いてVR体験をするプロジ�
 
 ## 動作環境
 
-Windows7,8 なら多分大丈夫  
+Unityの動作環境を満たすもの（Windows XP SP2 以降の Windows もしくは Mac OS X Intel CPU および 10.6 以降の Mac OS）
   
 Unity4.3.2  
   

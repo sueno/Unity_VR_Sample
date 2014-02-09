@@ -5,7 +5,7 @@ using Unity_VR.Global;
 using Unity_VR.MainPlayer.Motion;
 using Unity_VR.MainPlayer.State.Move;
 using Unity_VR.UseAnothoerLibraryClasses.LitJSON;
-using Unity_VR.UseAnothoerLibraryClasses.PropsAnimation;
+//using Unity_VR.UseAnothoerLibraryClasses.PropsAnimation;
 
 namespace Unity_VR.MainPlayer
 {
@@ -53,7 +53,7 @@ namespace Unity_VR.MainPlayer
 
         private RotationState[] jointRotations;
 
-        private MoveAnimatorController moveAnimator;
+//        private MoveAnimatorController moveAnimator;
 
         public void Awake()
         {

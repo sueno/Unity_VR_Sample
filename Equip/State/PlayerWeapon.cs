@@ -41,6 +41,7 @@ namespace Unity_VR.Equip.State
             }
             else
             {
+				this.power = 0f;
                 this.time = 0.001f;
                 this.pointroot = point;
                 this.pointMagunitude = 0f;
@@ -62,15 +63,7 @@ namespace Unity_VR.Equip.State
             Vector3 dis = (this.pointroot - this.point);
             float damage = getNaturalDamage(0f);
 
-            float power = dis.magnitude + this.power;
-
-            damage = ps * damage * 0.1f + (0 < ps ? ps : 0) * damage * 0.6f + damage * 0.3f;
-
-            ps = (dis.magnitude / time) - (100.0f / weapon.weight);
-            if (0 < ((-2.0f * ps * ps) + 2.0f + System.Math.Abs(dis.normalized.y * 6.0f)))
-            {
-                damage *= 2.0f;
-            }
+			damage = ps * 0.8f + (0 < ps ? ps : 0) * damage * 0.2f;
 
             this.power = power * 0.1f;
             this.time = 0.001f;
@@ -87,8 +80,7 @@ namespace Unity_VR.Equip.State
         private float getNaturalDamage(float rev)
         {
 
-            Vector3 distance = (this.pointroot - this.point);
-            float power = distance.magnitude;
+			float power = pointMagunitude + this.power;
 
             float damage = weapon.attack;
             if (10 < power)

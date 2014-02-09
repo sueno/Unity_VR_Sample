@@ -8,7 +8,7 @@ namespace Unity_VR.Item
     {
 
 
-        public GameObject ParentObj
+        public virtual GameObject ParentObj
         {
             get { return this.gameObject; }
         }

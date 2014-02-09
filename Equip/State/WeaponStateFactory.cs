@@ -14,10 +14,14 @@ namespace Unity_VR.Equip.State
             {
                 state = new PlayerWeapon();
             }
-            else
+            else if (player <= -10000)
             {
                 state = new DefaultWeaponStatus();
             }
+			else
+			{
+				state = new DistanceWeaponStatus();
+			}
             return state;
         }
     }
