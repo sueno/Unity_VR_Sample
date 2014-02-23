@@ -5,6 +5,7 @@ using Unity_VR.Global;
 using Unity_VR.MainPlayer.Motion;
 using Unity_VR.MainPlayer.State.Move;
 using Unity_VR.UseAnothoerLibraryClasses.LitJSON;
+using Unity_VR.UseAnothoerLibraryClasses.websocketSharp;
 //using Unity_VR.UseAnothoerLibraryClasses.PropsAnimation;
 
 namespace Unity_VR.MainPlayer
@@ -87,7 +88,7 @@ namespace Unity_VR.MainPlayer
             {
                 data.__setJointObject((int)PlayerJoint.RightWrist, null);
                 data.__setJointObject((int)PlayerJoint.LeftWrist, null);
-                data.MainPlayer.AddComponent<HandMotion>();
+                data.MainPlayer.AddComponent<WSHandMotion>();
                 data.RightHandController.registGameObj(data.RootObject);
                 data.LeftHandController.registGameObj(data.RootObject);
             }
@@ -112,7 +113,7 @@ namespace Unity_VR.MainPlayer
 
         void LateUpdate()
         {
-            Debug.Log("hogeeeee");
+//            Debug.Log("hogeeeee");
 
             // move
             Vector3 moveDirection = moveStatus.getMove();
@@ -143,7 +144,7 @@ namespace Unity_VR.MainPlayer
             {
                 a += rotateFilter >> ii & 1;
             }
-            Debug.Log(a);
+//            Debug.Log(a);
 
             // skeleton motion (kinect)
             for (int i = 0; i < jointRotations.Length; i++)
