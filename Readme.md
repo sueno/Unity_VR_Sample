@@ -10,11 +10,11 @@ UnityとKinect,iPhone,HMD(Oculus rift)等を用いてVR体験をするプロジ�
   
 - 使用するデバイス
  + Kinect	（必須）
- + iPhone	（任意、AppleDeveloperライセンスがあれば、RemoteController_for_Unityリポジトリからコントローラーのプログラムを使用できます）
- + Android	（任意、【13/02/05 更新】アプリ作ってもらいました（未完成）https://github.com/satanabe1/nohoPhoneController
+ + iPhone	（任意、【13/02/23 更新】次のURLからコントローラが使えます．http://sueno.github.io/Unity_VR_Sample_WSController/　iPhone5,iPhone4で動作確認．説明はそのうち追加します．）
+ + Android	（任意、【13/02/23 更新】上記コントローラは機種によっては使えない模様(Nexus7:回転可，ドラッグ不可)【13/02/05 更新】アプリ作ってもらいました（未完成）https://github.com/satanabe1/nohoPhoneController
  			アンドロイド用apkはこちらhttps://github.com/satanabe1/nohoPhoneController/tree/master/dist
  			）
- + Oculus rift	（任意、そのうち本プロジェクト用にカスタマイズしたassetを公開します）
+ + Oculus rift	（任意、そのうち設定方法書きます）
 
 - ゲームを想定した機能も多少用意しています  
  + 生き物オブジェクト	：　HP等いくつかのステータスを持ちます
@@ -36,19 +36,20 @@ Unity4.3.2
 注意！
 本プロジェクトは十分な動作確認を行っていないため、
 正常に動作するケースは稀です。  
-8割型失敗しても良い方のみお試しください。  
+8割がた失敗しても良い方のみお試しください。  
 詳細な手順はそのうち書きます。  
 
 0. 必要なもの
- + Kinect for Windows SDK 1.8	（必須）
+ + Kinect for Windows SDK 1.8　または OpenNI	（必須）
  + ZDK_Unity40_1.1_trial.unitypackage (Zigfu)		 （必須）
  + Unity4.3.2		 （必須、Unity4.3以降であれば動作するはずです）
  + mmd-for-unity 2.1b（MMDのモデルを動かしたい人向け）
  + LitJSON 0.7.0	 （iPhone,Androidのコントローラを使う場合必要）
- + websocket-sharp	 （マルチプレイしたい場合必要、サーバ側プログラムは今後公開予定）
+ + websocket-sharp	 （iPhone,Androidのコントローラを使う場合必要）
  + Osulus rift developper tool kit ? (Oculus rift 使いたい人)
 
-1. Microsoftから、Kinect for Windows SDK 1.8 のインストール
+1. Windows : Microsoftから、Kinect for Windows SDK 1.8 のインストール  
+	Mac : ZigFuのサイトからプラグイン(OpenNI含む)をインストール
 
 2. Unity4.3.2の入手（Unity4.3以降）
 
@@ -69,7 +70,8 @@ Unity4.3.2
 
 2. Assetsフォルダに、ZDK,Unity_VR_Sample,mmd-for-unity(,LitJSON,websocket-sharp,OVR)を入れます
 
-3. `Unity_VR_Sample/UseAnothoerLibraryClasses/`から、使っていないライブラリのクラスを消します（`Unity_VR_Sample/UseAnothoerLibraryClasses/websocket-sharp`,`Unity_VR_Sample/UseAnothoerLibraryClasses/LitJSON`あたり）
+3. `Unity_VR_Sample/UseAnothoerLibraryClasses/`から、使っていないライブラリのクラスを消します
+	（`Unity_VR_Sample/UseAnothoerLibraryClasses/PropsAnimation`あたり）
 
 4. Assetsフォルダに、Kinectで動かしたいモデル（以後モデル）を入れます
 
@@ -92,7 +94,7 @@ Unity4.3.2
 
 11. 実行します
 
-（11. エラーが出るので、バグを報告します
+（12. エラーが出るので、バグを報告します
 
 ## 使用方法（自作、またはUnityのモデルを使用する場合）
 
