@@ -10,7 +10,8 @@ UnityとKinect,iPhone,HMD(Oculus rift)等を用いてVR体験をするプロジ�
   
 - 使用するデバイス
  + Kinect	（必須）
- + iPhone	（任意、【13/02/23 更新】次のURLからコントローラが使えます．http://sueno.github.io/Unity_VR_Sample_WSController/　iPhone5,iPhone4で動作確認．説明はそのうち追加します．）
+ + iPhone	（任意、【13/02/23 更新】次のURLからコントローラが使えます．http://sueno.github.io/Unity_VR_Sample_WSController/
+ iPhone5,iPhone4で動作確認．説明はそのうち追加します．）
  + Android	（任意、【13/02/23 更新】上記コントローラは機種によっては使えない模様(Nexus7:回転可，ドラッグ不可)【13/02/05 更新】アプリ作ってもらいました（未完成）https://github.com/satanabe1/nohoPhoneController
  			アンドロイド用apkはこちらhttps://github.com/satanabe1/nohoPhoneController/tree/master/dist
  			）
