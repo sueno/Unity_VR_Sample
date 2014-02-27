@@ -402,7 +402,7 @@ namespace Unity_VR.UseAnothoerLibraryClasses.ZigFu
                 transform.localPosition = new Vector3(0f, (height * heightRivision * 0.2f), 0f);
                 jump = false;
             }
-            else if (3.5f < height)
+            else if (2.7f < height)
             {
                 if (!jump)
                 {

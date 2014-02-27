@@ -2,7 +2,7 @@
 using System.Collections;
 using Unity_VR.Global;
 
-public class E_wlof_badiche : MonoBehaviour {
+public class E_lizardman : MonoBehaviour {
 
 	
 	private CharacterController controller;
@@ -36,13 +36,13 @@ public class E_wlof_badiche : MonoBehaviour {
 			attackInterval+=Time.deltaTime;
 			if (self.animation.IsPlaying("_stay")) {
 				float random = Random.Range(0.0f,attackFrequency/attackInterval);
-				if (random<1f) {
+				if (random<0.7f) {
 					self.animation.Play("_attack01");
-				} else if (random<1.5f) {
+				} else if (random<1.4f) {
 					self.animation.Play("_attack02");
 				} else if (random<1.7f) {
 					self.animation.Play("_attack03");
-					Invoke("attackImpact",1.7f);
+					//					Invoke("attackImpact",1.7f);
 				} else {
 				}
 				if (random<1.6f) {
@@ -52,24 +52,24 @@ public class E_wlof_badiche : MonoBehaviour {
 				attackInterval = 0.001f;
 				self.animation.Play("_stay");
 			}
-
-//			controller.Move(new Vector3(Random.Range(0,1),0,Random.Range(0,1))*targetVelocity);
+			
+			//			controller.Move(new Vector3(Random.Range(0,1),0,Random.Range(0,1))*targetVelocity);
 		} else if (self.animation.isPlaying && !self.animation.IsPlaying("_stay") && !self.animation.IsPlaying("_move")) {
-
+			
 		} else if (dis<moveDistance*0.3f) {
 			attackInterval+=Time.deltaTime;
 			this.transform.LookAt(new Vector3(target.transform.position.x,this.transform.position.y,target.transform.position.z));
 			self.animation.Play("_stay");
-//			controller.Move(_direction.normalized*targetVelocity);
+			//			controller.Move(_direction.normalized*targetVelocity);
 		} else if (dis<moveDistance) {
 			this.transform.LookAt(target.transform);
 			self.animation.Play("_stay");//move
-//			controller.Move(_direction.normalized*targetVelocity);
+			//			controller.Move(_direction.normalized*targetVelocity);
 		} else {
 			self.animation.Play("_stay");
 		}
 	}
-
+	
 	public void attackImpact() {
 		GameObject effect = (GameObject)Resources.Load("groundImpact");
 		effect.transform.localScale = new Vector3(111f,5f,111f);

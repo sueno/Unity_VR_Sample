@@ -32,15 +32,15 @@ public class E_lizardman_wizard : MonoBehaviour {
 	void Update () {
 		float dis = Vector3.Distance(target.transform.position,self.transform.position);
 		Vector3 _direction = (target.transform.position - this.transform.position);
-		if (dis<6f) {
+		if (dis<10f) {
 			attackInterval+=Time.deltaTime;
 			if (self.animation.IsPlaying("_stay")) {
 				float random = Random.Range(0.0f,attackFrequency/attackInterval);
 				if (random<1f) {
-					self.animation.Play("_attack01");
-				} else if (random<1.5f) {
-					self.animation.Play("_attack02");
-				} else if (random<5.7f) {
+//					self.animation.Play("_attack01");
+//				} else if (random<1.5f) {
+//					self.animation.Play("_attack02");
+//				} else if (random<5.7f) {
 					self.animation.Play("_attack03");
 					Invoke("attackImpact",1.7f);
 				} else {
@@ -71,8 +71,9 @@ public class E_lizardman_wizard : MonoBehaviour {
 	}
 	
 	public void attackImpact() {
+		float dis = Vector3.Distance(target.transform.position,self.transform.position);
 		Vector3[] objPos = new Vector3[3];
-		Vector3 distanceVec = new Vector3(0f,0f,4f);
+		Vector3 distanceVec = new Vector3(0f,0f,Random.Range(dis-3f,dis+3f));
 		objPos[0] = transform.position + (Quaternion.Euler(0f,transform.eulerAngles.y,0f) * distanceVec);
 		objPos[1] = transform.position + (Quaternion.Euler(0f,transform.eulerAngles.y+40f,0f) * distanceVec);
 		objPos[2] = transform.position + (Quaternion.Euler(0f,transform.eulerAngles.y-40f,0f) * distanceVec);
