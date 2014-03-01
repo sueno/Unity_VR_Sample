@@ -19,7 +19,7 @@ namespace Unity_VR.MainPlayer.Motion
         private float motionKeepTime = 0.0f;
         private float motionKeepBorder = 0.2f;
 
-        private int keepCount = 0;
+        private float keepCount = 0f;
 
         public MotionHandler(GameObject obj)
         {
@@ -42,7 +42,7 @@ namespace Unity_VR.MainPlayer.Motion
             get { return motionKeepBorder; }
             set { this.motionKeepBorder = value; }
         }
-        public int KeepCount
+        public float KeepCount
         {
             get { return keepCount; }
         }
@@ -84,9 +84,9 @@ namespace Unity_VR.MainPlayer.Motion
             else
             {
                 motionKeepTime = 0.0f;
-                if (0 < keepCount)
+                if (0f < keepCount)
                 {
-                    keepCount = 0;
+                    keepCount = 0f;
                     RaiseUpdate(this);
                 }
             }

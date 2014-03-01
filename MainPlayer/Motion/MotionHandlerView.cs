@@ -14,7 +14,7 @@ namespace Unity_VR.MainPlayer.Motion
         public MotionHandlerView(JointInterface joint)
         {
             this.joint = joint;
-            AddUpdateAction(typeof(MotionHandler), obj => { if (0 < ((MotionHandler)obj).KeepCount) { joint.action(((MotionHandler)obj).KeepCount); } else { joint.resetAction(); } });
+			AddUpdateAction(typeof(MotionHandler), obj => { if (0 < ((MotionHandler)obj).KeepCount) { joint.action(((MotionHandler)obj).KeepCount, ((MotionHandler)obj).transform); } else { joint.resetAction(); } });
         }
 
     }

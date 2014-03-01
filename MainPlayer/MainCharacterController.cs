@@ -18,7 +18,7 @@ namespace Unity_VR.MainPlayer
         public GameObject mainCamera;
 
         public bool mainPlayer = false;
-        public float dist = 0.02f;
+        public float dist = 0.01f;
         public bool useRemoteController = false;
 
         public MainCharacterData data = new MainCharacterData();

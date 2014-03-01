@@ -153,13 +153,13 @@ namespace Unity_VR.Equip
             }
         }
 
-        public void action(int i)
+        public void action(float time, Transform targetTransform)
         {
             if (skilltrail != null)
             {
                 return;
             }
-            SkillInterface newskill = owner.skillActivate(i);
+            SkillInterface newskill = owner.skillActivate((int)time);
             if (newskill != null)
             {
                 GameObject eff = (GameObject)GameObject.Instantiate(keepEffect, parentObj.transform.position, parentObj.transform.rotation);

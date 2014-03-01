@@ -36,15 +36,15 @@ namespace Unity_VR.Item
         }
 
 
-        public virtual void action(int i)
+        public virtual void action(float time, Transform targetTransform)
         {
-            Debug.Log("hold(" + i + ") : " + base.holding);
+            Debug.Log("hold(" + time + ") : " + base.holding);
             if (!base.holding)
             {
                 return;
             }
 
-            if (i == 3)
+            if (time == 3f)
             {
                 this.use();
             }

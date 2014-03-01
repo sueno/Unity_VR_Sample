@@ -22,7 +22,7 @@ namespace Unity_VR.UseAnothoerLibraryClasses.websocketSharp
 		WebSocketServer wssv;
 
 		
-		public float dist = 0.02f;
+		public float dist = 0.001f;
 		public int _port = 11000;
 		
 		//	
@@ -43,7 +43,7 @@ namespace Unity_VR.UseAnothoerLibraryClasses.websocketSharp
 		private Vector3 rootR = Vector3.zero;
 		public string[] vecAxis = new string[3] { "x", "y", "z" };
 		public Vector3 wpRotate = new Vector3(-1f, -1f, -1f);
-		public float rotateRiv = 1.0f;
+		public float rotateRiv = 1f;
 		public float rotateLimit = 40.0f;
 		
 //		private Thread trd;
@@ -239,7 +239,7 @@ namespace Unity_VR.UseAnothoerLibraryClasses.websocketSharp
 		void turn(Vector3 pos, int x, int z)
 		{
 			rotateDirection = ((float)x - pos.x) * rotateRiv * 0.1f;
-			mainController.RotateStatus.setRotate(pos.x, x);
+			mainController.RotateStatus.setRotate(x-rotateDirection, x);
 			if (mainController.MoveStatus is Fly && mainController.MoveStatus.getMoveDirection().y == 0.0f)
 			{
 				mainController.MoveStatus.setMoveDirection(mainController.MoveStatus.getMoveDirection() + new Vector3(0.0f, (pos.z - z) * 2.0f, 0.0f));

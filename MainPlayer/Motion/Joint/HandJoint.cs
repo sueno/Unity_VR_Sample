@@ -20,7 +20,7 @@ namespace Unity_VR.MainPlayer.Motion.Joint
             }
         }
 
-        public void action(int i)
+        public void action(float time, Transform targetTransform)
         {
             //		GameObject eff = (GameObject)GameObject.Instantiate(keepEffect,target.transform.position,target.transform.rotation);
             //		GameObject.Destroy(eff, 0.1f);
